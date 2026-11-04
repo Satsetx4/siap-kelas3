@@ -1,5 +1,44 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-display: "Fredoka Variable", "Fredoka", ui-rounded, sans-serif;
+  --font-body: "Andika", ui-sans-serif, sans-serif;
+  --font-arab: "Scheherazade New", "Amiri", serif;
+
+  --color-krem-50: #FFFBF5;  --color-krem-100: #FFF3E3; --color-krem-200: #F6E7D3;
+  --color-tinta-900: #1E1B18; --color-tinta-700: #3D3731; --color-tinta-500: #6B625A;
+  --color-malam-950: #14110F; --color-malam-900: #1D1915; --color-malam-800: #2B2520; --color-malam-700: #3A332C;
+
+  --color-jeruk-400: #FF9A4D; --color-jeruk-500: #FF7A1A; --color-jeruk-600: #E2620A; --color-jeruk-700: #B84D06;
+  --color-pai-500: #059669;   --color-pai-600: #047857;   --color-pai-100: #D1FAE5;   --color-pai-900: #064E3B;
+  --color-ing-500: #0284C7;   --color-ing-600: #0369A1;   --color-ing-100: #E0F2FE;   --color-ing-900: #0C4A6E;
+
+  --color-benar-500: #16A34A; --color-benar-100: #DCFCE7;
+  --color-salah-500: #DC2626; --color-salah-100: #FEE2E2;
+  --color-ragu-500:  #F59E0B; --color-ragu-100:  #FEF3C7;
+}
 
 body {
-  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-body);
+  background-color: var(--color-krem-50);
+  color: var(--color-tinta-900);
+}
+
+.dark body {
+  background-color: var(--color-malam-950);
+  color: #F5EFE6;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

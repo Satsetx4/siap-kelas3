@@ -12,7 +12,7 @@
 ---
 
 ## Status Saat Ini
-- **Tahap Aktif:** S0 selesai, berikutnya S1 (Fondasi desain)
+- **Tahap Aktif:** S1 selesai, berikutnya S2 (Layout, router, halaman kerangka)
 - **Lokasi Proyek:** `D:\!AGY\siap-kelas3`
 - **URL Produksi:** *(belum di-deploy, diisi pada S12)*
 
@@ -22,7 +22,7 @@
 
 ### Tahap 1: Kerangka Aplikasi (S0 – S10)
 - [x] **S0** — Persiapan proyek, konfigurasi Vite/Tailwind/PWA/Playwright, & pembuatan repo GitHub
-- [ ] **S1** — Fondasi desain: token warna `@theme`, font lokal, skrip anti-kedip tema, komponen UI dasar (`components/ui`)
+- [x] **S1** — Fondasi desain: token warna `@theme`, font lokal, skrip anti-kedip tema, komponen UI dasar (`components/ui`)
 - [ ] **S2** — Layout (`PageShell`, `AppHeader`, `MobileBottomNav`), router, `ErrorBoundary`, & halaman 404
 - [ ] **S3** — `safeStorage`, store Zustand (`useApp`, `usePref`), halaman Pilih & Buat Profil (`zod`)
 - [ ] **S4** — Tipe isi (`types.ts`), helper, validator konten (`validasi.test.ts`), halaman Mapel, Bab, & Kartu Materi + TTS (`tts.ts`)
@@ -59,6 +59,12 @@
 ---
 
 ## Log Sesi
+
+### 2026-11-04 — S1 Fondasi desain (Selesai)
+- **Yang dikerjakan:** token `@theme` + gaya dasar + reduced-motion, font lokal Fredoka/Andika/Scheherazade, `lib/motion.ts`, komponen `Button/IconButton/Card/Dialog/Segmented/ProgressBar/ProgressRing/Stars/Badge`, `ThemeToggle`, favicon lingkaran jeruk + 3, `index.html` id + SEO + boot tema.
+- **Verifikasi:** `npm.cmd run cek` lulus, `e2e tema.spec.ts` 2 passed (tanpa kedip, bertahan reload).
+- **Catatan:** paket Scheherazade New tersedia, tidak perlu Amiri.
+- **Sesi berikutnya:** **S2** (Layout, router, halaman kerangka).
 
 ### 2026-11-04 — S0 Persiapan proyek (Selesai)
 - **Yang dikerjakan:** scaffold Vite react-ts, install deps (react-router, zustand, motion, lucide, zod, analytics, fontsource, tailwind, PWA, vitest, playwright), tulis `vite.config.ts` + `vercel.json` + `playwright.config.ts` + skrip `package.json`, `App.tsx` sementara, tes asap unit+e2e.
