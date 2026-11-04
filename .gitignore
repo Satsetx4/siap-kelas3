@@ -1,0 +1,12 @@
+node_modules/
+dist/
+dist-ssr/
+*.local
+bahan/
+test-results/
+playwright-report/
+.env
+.env.*
+!.env.e2e
+!.env.example
+.vercel/
