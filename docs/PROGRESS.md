@@ -12,7 +12,7 @@
 ---
 
 ## Status Saat Ini
-- **Tahap Aktif:** Menunggu S0 (Persiapan proyek & repo)
+- **Tahap Aktif:** S0 selesai, berikutnya S1 (Fondasi desain)
 - **Lokasi Proyek:** `D:\!AGY\siap-kelas3`
 - **URL Produksi:** *(belum di-deploy, diisi pada S12)*
 
@@ -21,7 +21,7 @@
 ## Daftar Sesi
 
 ### Tahap 1: Kerangka Aplikasi (S0 – S10)
-- [ ] **S0** — Persiapan proyek, konfigurasi Vite/Tailwind/PWA/Playwright, & pembuatan repo GitHub
+- [x] **S0** — Persiapan proyek, konfigurasi Vite/Tailwind/PWA/Playwright, & pembuatan repo GitHub
 - [ ] **S1** — Fondasi desain: token warna `@theme`, font lokal, skrip anti-kedip tema, komponen UI dasar (`components/ui`)
 - [ ] **S2** — Layout (`PageShell`, `AppHeader`, `MobileBottomNav`), router, `ErrorBoundary`, & halaman 404
 - [ ] **S3** — `safeStorage`, store Zustand (`useApp`, `usePref`), halaman Pilih & Buat Profil (`zod`)
@@ -59,6 +59,11 @@
 ---
 
 ## Log Sesi
+
+### 2026-11-04 — S0 Persiapan proyek (Selesai)
+- **Yang dikerjakan:** scaffold Vite react-ts, install deps (react-router, zustand, motion, lucide, zod, analytics, fontsource, tailwind, PWA, vitest, playwright), tulis `vite.config.ts` + `vercel.json` + `playwright.config.ts` + skrip `package.json`, `App.tsx` sementara, tes asap unit+e2e.
+- **Verifikasi:** `npm.cmd run cek` lulus, `npm.cmd run e2e` 2 passed (hp+desktop).
+- **Sesi berikutnya:** **S1** (Fondasi desain).
 
 ### 2026-11-04 — Perencanaan Awal (Selesai)
 - **Status:** Seluruh keputusan produk dikunci melalui wawancara `/grill-me` (16 keputusan).
