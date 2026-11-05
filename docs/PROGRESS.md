@@ -12,7 +12,7 @@
 ---
 
 ## Status Saat Ini
-- **Tahap Aktif:** S4 selesai, berikutnya S5 (Mesin soal & komponen jawaban)
+- **Tahap Aktif:** S5 selesai, berikutnya S6 (Alur latihan, hasil, pembahasan)
 - **Lokasi Proyek:** `D:\!AGY\siap-kelas3`
 - **URL Produksi:** *(belum di-deploy, diisi pada S12)*
 
@@ -26,7 +26,7 @@
 - [x] **S2** — Layout (`PageShell`, `AppHeader`, `MobileBottomNav`), router, `ErrorBoundary`, & halaman 404
 - [x] **S3** — `safeStorage`, store Zustand (`useApp`, `usePref`), halaman Pilih & Buat Profil (`zod`)
 - [x] **S4** — Tipe isi (`types.ts`), helper, validator konten (`validasi.test.ts`), halaman Mapel, Bab, & Kartu Materi + TTS (`tts.ts`)
-- [ ] **S5** — Mesin soal (`periksa`, `pilihSoal`, `nilai`, `rng`) & seluruh komponen jawaban (`pg`, `bs`, `isian`, `jodohkan`, `urutkan`, `uraian`, `Pembahasan`)
+- [x] **S5** — Mesin soal (`periksa`, `pilihSoal`, `nilai`, `rng`) & seluruh komponen jawaban (`pg`, `bs`, `isian`, `jodohkan`, `urutkan`, `uraian`, `Pembahasan`)
 - [ ] **S6** — Alur Latihan, dialog keluar/lanjut, halaman Hasil & Pembahasan, kartu Lanjutkan di Beranda
 - [ ] **S7** — Mode Ujian Bab & Ujian Gabungan (timer absolut, ragu-ragu, grid nomor soal, nilai terbaik & bintang)
 - [ ] **S8** — Bank Soal Salah (`/ulang`), halaman Prestasi (`/prestasi`), target harian 10 soal, hari beruntun, & sistem lencana
@@ -59,6 +59,12 @@
 ---
 
 ## Log Sesi
+
+### 2026-11-04 — S5 Mesin soal & komponen jawaban (Selesai)
+- **Yang dikerjakan:** `lib/rng.ts` (mulberry32 + Fisher–Yates), `engine/periksa.ts` (normalisasi, periksa, jawabanLengkap, jawabanBenar), `engine/pilihSoal.ts` (latihan/ujian bab/gabungan/ulang + `buatAcak`), `engine/nilai.ts`, komponen `SoalPG/SoalBS/SoalIsian/SoalJodohkan/SoalUrutkan/SoalUraian/SoalView/Pembahasan/GambarSoal`.
+- **Verifikasi:** `npm.cmd run cek` (42 unit test), `npm.cmd run e2e` 18 passed.
+- **Catatan:** `tests/setup.ts` kini memanggil `cleanup()` tiap tes (DOM antar-tes sebelumnya bocor). `catatanKunci` tidak pernah dirender ke anak (diuji).
+- **Sesi berikutnya:** **S6** (Alur latihan, hasil, pembahasan).
 
 ### 2026-11-04 — S4 Model isi & halaman mapel/bab/materi (Selesai)
 - **Yang dikerjakan:** `content/types.ts`, `helpers.ts`, `index.ts`, `pai/index.ts` & `inggris/index.ts` (`bab: []`), fixture `__uji__/mapelUji.ts` (2 bab, semua tipe soal & blok), validator `tests/content/validasi.test.ts` (pola ID, kunci, cakupan 15 soal per sub-bab modul), `lib/tts.ts`, `ContentProvider`, `TeksArab`, `TombolBacakan`, `BlokRenderer`, `KartuMateri`, halaman `MapelList`/`BabList`/`BabDetail`/`Materi`, `lib/ringkasan.ts`.
