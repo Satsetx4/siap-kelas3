@@ -2,15 +2,30 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 import PageShell from './components/layout/PageShell';
 import HalamanKerangka from './pages/HalamanKerangka';
 import NotFound from './pages/NotFound';
+import Profil from './pages/Profil';
+import ProfilBaru from './pages/ProfilBaru';
+import Beranda from './pages/Beranda';
+import { useApp } from './store/useApp';
+
+function Pengalih() {
+  const profilAktifId = useApp((s) => s.profilAktifId);
+  return <Navigate to={profilAktifId ? '/beranda' : '/profil'} replace />;
+}
+
+function ButuhProfil({ children }: { children: React.ReactNode }) {
+  const profilAktifId = useApp((s) => s.profilAktifId);
+  if (!profilAktifId) return <Navigate to="/profil" replace />;
+  return <>{children}</>;
+}
 
 export const router = createBrowserRouter([
   {
     element: <PageShell />,
     children: [
-      { path: '/', element: <Navigate to="/beranda" replace /> },
-      { path: '/profil', element: <HalamanKerangka judul="Siapa yang belajar?" /> },
-      { path: '/profil/baru', element: <HalamanKerangka judul="Profil Baru" backTo="/profil" /> },
-      { path: '/beranda', element: <HalamanKerangka judul="Beranda" tanpaKembali /> },
+      { path: '/', element: <Pengalih /> },
+      { path: '/profil', element: <Profil /> },
+      { path: '/profil/baru', element: <ProfilBaru /> },
+      { path: '/beranda', element: <ButuhProfil><Beranda /></ButuhProfil> },
       { path: '/mapel', element: <HalamanKerangka judul="Mata Pelajaran" backTo="/beranda" /> },
       { path: '/mapel/:mapelId', element: <HalamanKerangka judul="Mata Pelajaran" backTo="/mapel" /> },
       { path: '/mapel/:mapelId/bab/:babId', element: <HalamanKerangka judul="Bab" backTo="/mapel" /> },

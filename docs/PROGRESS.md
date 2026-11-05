@@ -12,7 +12,7 @@
 ---
 
 ## Status Saat Ini
-- **Tahap Aktif:** S2 selesai, berikutnya S3 (Penyimpanan & profil)
+- **Tahap Aktif:** S3 selesai, berikutnya S4 (Tipe isi, validator, halaman mapel/bab/materi)
 - **Lokasi Proyek:** `D:\!AGY\siap-kelas3`
 - **URL Produksi:** *(belum di-deploy, diisi pada S12)*
 
@@ -24,7 +24,7 @@
 - [x] **S0** — Persiapan proyek, konfigurasi Vite/Tailwind/PWA/Playwright, & pembuatan repo GitHub
 - [x] **S1** — Fondasi desain: token warna `@theme`, font lokal, skrip anti-kedip tema, komponen UI dasar (`components/ui`)
 - [x] **S2** — Layout (`PageShell`, `AppHeader`, `MobileBottomNav`), router, `ErrorBoundary`, & halaman 404
-- [ ] **S3** — `safeStorage`, store Zustand (`useApp`, `usePref`), halaman Pilih & Buat Profil (`zod`)
+- [x] **S3** — `safeStorage`, store Zustand (`useApp`, `usePref`), halaman Pilih & Buat Profil (`zod`)
 - [ ] **S4** — Tipe isi (`types.ts`), helper, validator konten (`validasi.test.ts`), halaman Mapel, Bab, & Kartu Materi + TTS (`tts.ts`)
 - [ ] **S5** — Mesin soal (`periksa`, `pilihSoal`, `nilai`, `rng`) & seluruh komponen jawaban (`pg`, `bs`, `isian`, `jodohkan`, `urutkan`, `uraian`, `Pembahasan`)
 - [ ] **S6** — Alur Latihan, dialog keluar/lanjut, halaman Hasil & Pembahasan, kartu Lanjutkan di Beranda
@@ -59,6 +59,12 @@
 ---
 
 ## Log Sesi
+
+### 2026-11-04 — S3 Penyimpanan & profil (Selesai)
+- **Yang dikerjakan:** `safeStorage` (fallback memori + `bersihkanSemua`), `store/types.ts`, `useApp` (buat/pilih/ubah/hapus profil maks 5, `perbaruiStat`, setTabBab, setPosisiMateri, resetSemua, merge tahan data rusak), `usePref`, `lib/avatar.ts` (12 ikon), halaman `Profil`, `ProfilBaru` (zod), `Beranda` awal, router `/` pengalih + guard `ButuhProfil`.
+- **Verifikasi:** `npm.cmd run cek` (14 unit test lulus), `npm.cmd run e2e` 14 passed (profil, tema, navigasi, 404, 360px).
+- **Catatan:** `tests/e2e/bantu.ts` menyuntik profil awal via `addInitScript`; spec lama disesuaikan karena beranda kini butuh profil.
+- **Sesi berikutnya:** **S4** (Tipe isi, validator, halaman mapel/bab/materi).
 
 ### 2026-11-04 — S2 Layout, router, 404 (Selesai)
 - **Yang dikerjakan:** `PageShell` (480px, padding bottom nav, transisi geser), `AppHeader` (kembali + judul + aksi), `MobileBottomNav` (4 tab, pil `layoutId`, badge), `Breadcrumbs`, `Seo`, `ErrorBoundary`, `NotFound`, `router.tsx` semua route, `App.tsx` dibungkus `MotionConfig` + `ErrorBoundary` + `Analytics`.
