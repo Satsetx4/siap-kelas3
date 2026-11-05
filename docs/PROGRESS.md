@@ -12,7 +12,7 @@
 ---
 
 ## Status Saat Ini
-- **Tahap Aktif:** S1 selesai, berikutnya S2 (Layout, router, halaman kerangka)
+- **Tahap Aktif:** S2 selesai, berikutnya S3 (Penyimpanan & profil)
 - **Lokasi Proyek:** `D:\!AGY\siap-kelas3`
 - **URL Produksi:** *(belum di-deploy, diisi pada S12)*
 
@@ -23,7 +23,7 @@
 ### Tahap 1: Kerangka Aplikasi (S0 – S10)
 - [x] **S0** — Persiapan proyek, konfigurasi Vite/Tailwind/PWA/Playwright, & pembuatan repo GitHub
 - [x] **S1** — Fondasi desain: token warna `@theme`, font lokal, skrip anti-kedip tema, komponen UI dasar (`components/ui`)
-- [ ] **S2** — Layout (`PageShell`, `AppHeader`, `MobileBottomNav`), router, `ErrorBoundary`, & halaman 404
+- [x] **S2** — Layout (`PageShell`, `AppHeader`, `MobileBottomNav`), router, `ErrorBoundary`, & halaman 404
 - [ ] **S3** — `safeStorage`, store Zustand (`useApp`, `usePref`), halaman Pilih & Buat Profil (`zod`)
 - [ ] **S4** — Tipe isi (`types.ts`), helper, validator konten (`validasi.test.ts`), halaman Mapel, Bab, & Kartu Materi + TTS (`tts.ts`)
 - [ ] **S5** — Mesin soal (`periksa`, `pilihSoal`, `nilai`, `rng`) & seluruh komponen jawaban (`pg`, `bs`, `isian`, `jodohkan`, `urutkan`, `uraian`, `Pembahasan`)
@@ -59,6 +59,11 @@
 ---
 
 ## Log Sesi
+
+### 2026-11-04 — S2 Layout, router, 404 (Selesai)
+- **Yang dikerjakan:** `PageShell` (480px, padding bottom nav, transisi geser), `AppHeader` (kembali + judul + aksi), `MobileBottomNav` (4 tab, pil `layoutId`, badge), `Breadcrumbs`, `Seo`, `ErrorBoundary`, `NotFound`, `router.tsx` semua route, `App.tsx` dibungkus `MotionConfig` + `ErrorBoundary` + `Analytics`.
+- **Verifikasi:** `npm.cmd run cek` lulus; `e2e navigasi.spec.ts` 6 passed (tab nav, 404, tanpa scroll horizontal 360px).
+- **Sesi berikutnya:** **S3** (Penyimpanan & profil).
 
 ### 2026-11-04 — S1 Fondasi desain (Selesai)
 - **Yang dikerjakan:** token `@theme` + gaya dasar + reduced-motion, font lokal Fredoka/Andika/Scheherazade, `lib/motion.ts`, komponen `Button/IconButton/Card/Dialog/Segmented/ProgressBar/ProgressRing/Stars/Badge`, `ThemeToggle`, favicon lingkaran jeruk + 3, `index.html` id + SEO + boot tema.
