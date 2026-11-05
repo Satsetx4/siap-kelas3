@@ -13,22 +13,18 @@ interface Props {
 
 export default function Dialog({ buka, judul, onTutup, children, teksBatal = 'Batal' }: Props) {
   const pemicu = useRef<Element | null>(null);
+  const panel = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!buka) return;
     pemicu.current = document.activeElement;
+    panel.current?.focus();
     const kunci = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onTutup();
     };
     document.addEventListener('keydown', kunci);
-    try {
-      document.getElementById('root')?.setAttribute('inert', '');
-    } catch { /* abaikan */ }
     return () => {
       document.removeEventListener('keydown', kunci);
-      try {
-        document.getElementById('root')?.removeAttribute('inert');
-      } catch { /* abaikan */ }
       (pemicu.current as HTMLElement | null)?.focus?.();
     };
   }, [buka, onTutup]);
@@ -42,10 +38,12 @@ export default function Dialog({ buka, judul, onTutup, children, teksBatal = 'Ba
       role="presentation"
     >
       <div
+        ref={panel}
         role="dialog"
         aria-modal="true"
         aria-label={judul}
-        className="w-full max-w-md rounded-t-3xl bg-white p-5 dark:bg-malam-900 sm:rounded-3xl"
+        tabIndex={-1}
+        className="w-full max-w-md rounded-t-3xl bg-white p-5 outline-none dark:bg-malam-900 sm:rounded-3xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mb-4 flex items-center justify-between">

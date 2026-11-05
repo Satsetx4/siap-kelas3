@@ -12,7 +12,7 @@
 ---
 
 ## Status Saat Ini
-- **Tahap Aktif:** S6 selesai, berikutnya S7 (Ujian bab & ujian gabungan)
+- **Tahap Aktif:** S7 selesai, berikutnya S8 (Bank soal salah, prestasi, target harian, lencana)
 - **Lokasi Proyek:** `D:\!AGY\siap-kelas3`
 - **URL Produksi:** *(belum di-deploy, diisi pada S12)*
 
@@ -28,7 +28,7 @@
 - [x] **S4** — Tipe isi (`types.ts`), helper, validator konten (`validasi.test.ts`), halaman Mapel, Bab, & Kartu Materi + TTS (`tts.ts`)
 - [x] **S5** — Mesin soal (`periksa`, `pilihSoal`, `nilai`, `rng`) & seluruh komponen jawaban (`pg`, `bs`, `isian`, `jodohkan`, `urutkan`, `uraian`, `Pembahasan`)
 - [x] **S6** — Alur Latihan, dialog keluar/lanjut, halaman Hasil & Pembahasan, kartu Lanjutkan di Beranda
-- [ ] **S7** — Mode Ujian Bab & Ujian Gabungan (timer absolut, ragu-ragu, grid nomor soal, nilai terbaik & bintang)
+- [x] **S7** — Mode Ujian Bab & Ujian Gabungan (timer absolut, ragu-ragu, grid nomor soal, nilai terbaik & bintang)
 - [ ] **S8** — Bank Soal Salah (`/ulang`), halaman Prestasi (`/prestasi`), target harian 10 soal, hari beruntun, & sistem lencana
 - [ ] **S9** — Area Orang Tua: gerbang perkalian (`/ortu`), Rapor detail (`/ortu/rapor`), Pengaturan, daftar "Kunci Perlu Dicek", & Reset Semua Data
 - [ ] **S10** — SEO (`robots.txt`, `sitemap.xml`, `Seo`), ikon PWA, gambar OG, analitik, uji offline, & audit Lighthouse
@@ -59,6 +59,12 @@
 ---
 
 ## Log Sesi
+
+### 2026-11-04 — S7 Ujian bab & ujian gabungan (Selesai)
+- **Yang dikerjakan:** mode ujian di `Sesi.tsx` (timer absolut mm:ss + denyut merah < 5 menit, tombol Sebelumnya/Ragu/Berikutnya, grid nomor berwarna, dialog "Masih ada X soal kosong dan Y ragu-ragu", auto-kumpul saat waktu habis), `pages/UjianGabungan.tsx` (pilih mapel + centang bab), tombol "Mulai Ujian Bab" di `BabDetail` (30 menit, 20 soal), e2e `ujian.spec.ts`.
+- **Verifikasi:** `npm.cmd run cek` (43 unit test), `npm.cmd run e2e` 24 passed.
+- **Catatan:** bug penting ditemukan & diperbaiki — `Dialog` menandai `#root` sebagai `inert` sehingga isi dialognya sendiri tidak bisa diklik; kini fokus dipindah ke panel dialog tanpa `inert`. Uji waktu habis memakai sesi kedaluwarsa yang ditanam (`seedSesiKedaluwarsa`) karena `page.clock` membekukan animasi `AnimatePresence`.
+- **Sesi berikutnya:** **S8** (Bank soal salah, prestasi, target harian, lencana).
 
 ### 2026-11-04 — S6 Alur latihan, hasil, pembahasan (Selesai)
 - **Yang dikerjakan:** aksi sesi di store (`mulaiSesi`, `jawab`, `cekJawaban`, `pindahSoal`, `tandaiRagu`, `selesaikanSesi`, `batalkanSesi`), `lib/sesi.ts`, `lib/tanggal.ts`, `pages/Sesi.tsx` (dialog keluar, petunjuk, umpan balik, pembahasan), `pages/Hasil.tsx` (nilai berhitung, bintang, daftar pembahasan, Ulangi yang Salah), tombol mulai di `BabDetail` + `Materi`, kartu Lanjutkan di Beranda, infra e2e (`VITE_E2E`, `build:e2e`, `tests/e2e/bantu.ts`, `latihan.spec.ts`), tes `build-bersih`.

@@ -12,7 +12,7 @@ import Segmented from '../components/ui/Segmented';
 import NotFound from './NotFound';
 import { soalBab, soalDinilai } from '../content/helpers';
 import { bintangDariNilai } from '../lib/ringkasan';
-import { pilihLatihan } from '../engine/pilihSoal';
+import { pilihLatihan, pilihUjianBab } from '../engine/pilihSoal';
 import { buatRng } from '../lib/rng';
 import { buatSesi } from '../lib/sesi';
 
@@ -55,6 +55,19 @@ export default function BabDetail() {
       babIds: [bab.id],
       filter,
       soal: dipilih,
+    }));
+    navigate('/sesi');
+  };
+  const mulaiUjianBab = () => {
+    const dipilih = pilihUjianBab(bab, buatRng(Date.now()));
+    if (dipilih.length === 0) return;
+    mulaiSesi(buatSesi({
+      jenis: 'ujian-bab',
+      mapelId: mapel.id,
+      babIds: [bab.id],
+      filter: 'semua',
+      soal: dipilih,
+      durasiMenit: 30,
     }));
     navigate('/sesi');
   };
@@ -153,7 +166,7 @@ export default function BabDetail() {
             <p className="text-lg">
               Nilai terbaik: {nilaiTerbaik !== undefined ? `${nilaiTerbaik} (${bintangDariNilai(nilaiTerbaik)} bintang)` : 'belum ada'}
             </p>
-            <Button ukuran="lg" className={`w-full ${warna === 'pai' ? 'bg-pai-500 text-white' : ''}`} disabled>
+            <Button ukuran="lg" className={`w-full ${warna === 'pai' ? 'bg-pai-500 text-white' : ''}`} onClick={mulaiUjianBab}>
               Mulai Ujian Bab
             </Button>
           </section>

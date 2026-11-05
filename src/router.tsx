@@ -11,6 +11,7 @@ import BabDetail from './pages/BabDetail';
 import Materi from './pages/Materi';
 import Sesi from './pages/Sesi';
 import Hasil from './pages/Hasil';
+import UjianGabungan from './pages/UjianGabungan';
 import { useApp } from './store/useApp';
 
 function Pengalih() {
@@ -36,7 +37,7 @@ export const router = createBrowserRouter([
       { path: '/mapel/:mapelId', element: <BabList /> },
       { path: '/mapel/:mapelId/bab/:babId', element: <BabDetail /> },
       { path: '/mapel/:mapelId/bab/:babId/materi/:subBabId', element: <Materi /> },
-      { path: '/ujian-gabungan', element: <HalamanKerangka judul="Ujian Gabungan" backTo="/mapel" /> },
+      { path: '/ujian-gabungan', element: <ButuhProfil><UjianGabungan /></ButuhProfil> },
       { path: '/sesi', element: <ButuhProfil><Sesi /></ButuhProfil> },
       { path: '/hasil', element: <ButuhProfil><Hasil /></ButuhProfil> },
       { path: '/ulang', element: <HalamanKerangka judul="Ulang Soal Salah" backTo="/beranda" /> },
