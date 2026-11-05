@@ -12,7 +12,7 @@
 ---
 
 ## Status Saat Ini
-- **Tahap Aktif:** S7 selesai, berikutnya S8 (Bank soal salah, prestasi, target harian, lencana)
+- **Tahap Aktif:** S8 selesai, berikutnya S9 (Area Orang Tua)
 - **Lokasi Proyek:** `D:\!AGY\siap-kelas3`
 - **URL Produksi:** *(belum di-deploy, diisi pada S12)*
 
@@ -29,7 +29,7 @@
 - [x] **S5** — Mesin soal (`periksa`, `pilihSoal`, `nilai`, `rng`) & seluruh komponen jawaban (`pg`, `bs`, `isian`, `jodohkan`, `urutkan`, `uraian`, `Pembahasan`)
 - [x] **S6** — Alur Latihan, dialog keluar/lanjut, halaman Hasil & Pembahasan, kartu Lanjutkan di Beranda
 - [x] **S7** — Mode Ujian Bab & Ujian Gabungan (timer absolut, ragu-ragu, grid nomor soal, nilai terbaik & bintang)
-- [ ] **S8** — Bank Soal Salah (`/ulang`), halaman Prestasi (`/prestasi`), target harian 10 soal, hari beruntun, & sistem lencana
+- [x] **S8** — Bank Soal Salah (`/ulang`), halaman Prestasi (`/prestasi`), target harian 10 soal, hari beruntun, & sistem lencana
 - [ ] **S9** — Area Orang Tua: gerbang perkalian (`/ortu`), Rapor detail (`/ortu/rapor`), Pengaturan, daftar "Kunci Perlu Dicek", & Reset Semua Data
 - [ ] **S10** — SEO (`robots.txt`, `sitemap.xml`, `Seo`), ikon PWA, gambar OG, analitik, uji offline, & audit Lighthouse
 
@@ -59,6 +59,12 @@
 ---
 
 ## Log Sesi
+
+### 2026-11-04 — S8 Bank salah, prestasi, target harian, lencana (Selesai)
+- **Yang dikerjakan:** `engine/lencana.ts` (8 lencana, `hariBeruntun`, `evaluasiLencana`, `lencanaBaru`), evaluasi lencana di `cekJawaban`/`selesaikanSesi` + `lencanaBaru` transien (dikecualikan dari `partialize`), `ToastLencana`, `pages/Ulang.tsx`, `pages/Prestasi.tsx` (target, kalender 14 hari, lencana, bintang per mapel), kartu Target Hari Ini di Beranda, badge jumlah soal salah di bottom nav.
+- **Verifikasi:** `npm.cmd run cek` (56 unit test), `npm.cmd run e2e` 28 passed.
+- **Catatan:** `addInitScript` di `tests/e2e/bantu.ts` menanam state di SETIAP navigasi sehingga progres uji selalu ter-reset; kini hanya menanam bila `sk3:data` belum ada.
+- **Sesi berikutnya:** **S9** (Area Orang Tua).
 
 ### 2026-11-04 — S7 Ujian bab & ujian gabungan (Selesai)
 - **Yang dikerjakan:** mode ujian di `Sesi.tsx` (timer absolut mm:ss + denyut merah < 5 menit, tombol Sebelumnya/Ragu/Berikutnya, grid nomor berwarna, dialog "Masih ada X soal kosong dan Y ragu-ragu", auto-kumpul saat waktu habis), `pages/UjianGabungan.tsx` (pilih mapel + centang bab), tombol "Mulai Ujian Bab" di `BabDetail` (30 menit, 20 soal), e2e `ujian.spec.ts`.

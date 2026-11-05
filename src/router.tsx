@@ -12,6 +12,8 @@ import Materi from './pages/Materi';
 import Sesi from './pages/Sesi';
 import Hasil from './pages/Hasil';
 import UjianGabungan from './pages/UjianGabungan';
+import Ulang from './pages/Ulang';
+import Prestasi from './pages/Prestasi';
 import { useApp } from './store/useApp';
 
 function Pengalih() {
@@ -40,8 +42,8 @@ export const router = createBrowserRouter([
       { path: '/ujian-gabungan', element: <ButuhProfil><UjianGabungan /></ButuhProfil> },
       { path: '/sesi', element: <ButuhProfil><Sesi /></ButuhProfil> },
       { path: '/hasil', element: <ButuhProfil><Hasil /></ButuhProfil> },
-      { path: '/ulang', element: <HalamanKerangka judul="Ulang Soal Salah" backTo="/beranda" /> },
-      { path: '/prestasi', element: <HalamanKerangka judul="Prestasi" backTo="/beranda" /> },
+      { path: '/ulang', element: <ButuhProfil><Ulang /></ButuhProfil> },
+      { path: '/prestasi', element: <ButuhProfil><Prestasi /></ButuhProfil> },
       { path: '/ortu', element: <HalamanKerangka judul="Area Orang Tua" backTo="/beranda" /> },
       { path: '/ortu/rapor', element: <HalamanKerangka judul="Rapor" backTo="/ortu" /> },
       { path: '/ortu/pengaturan', element: <HalamanKerangka judul="Pengaturan" backTo="/ortu" /> },

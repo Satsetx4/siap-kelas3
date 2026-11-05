@@ -7,12 +7,19 @@ import AppHeader from '../components/layout/AppHeader';
 import Seo from '../components/layout/Seo';
 import ThemeToggle from '../components/layout/ThemeToggle';
 import Card from '../components/ui/Card';
+import ProgressRing from '../components/ui/ProgressRing';
+import { TARGET_HARIAN, hariBeruntun } from '../engine/lencana';
+import { kunciHari } from '../lib/tanggal';
 
 export default function Beranda() {
   const { profil, profilAktifId } = useApp();
   const progres = useApp((s) => (profilAktifId ? s.progres[profilAktifId] : undefined));
   const navigate = useNavigate();
   const aktif = profil.find((p) => p.id === profilAktifId);
+
+  const hariIni = kunciHari();
+  const jumlahHariIni = progres?.harian[hariIni] ?? 0;
+  const streak = hariBeruntun(progres?.harian ?? {}, hariIni);
 
   if (!aktif) return null;
   const { Ikon, latar } = avatarDari(aktif.avatar);
@@ -46,6 +53,17 @@ export default function Beranda() {
         }
       />
       <main className="space-y-3 p-4">
+        <Card>
+          <div className="flex items-center gap-4">
+            <ProgressRing persen={(jumlahHariIni / TARGET_HARIAN) * 100} label="Target hari ini" ukuran={80} />
+            <div>
+              <h2 className="text-xl">Target Hari Ini</h2>
+              <p className="text-lg text-tinta-500 dark:text-[#B8AEA3]">{jumlahHariIni} dari {TARGET_HARIAN} soal</p>
+              <p className="text-base text-tinta-500 dark:text-[#B8AEA3]">Hari beruntun: {streak}</p>
+            </div>
+          </div>
+        </Card>
+
         {progres?.sesiAktif ? (
           <Card onClick={() => navigate('/sesi')} interaktif>
             <p className="text-base text-tinta-500 dark:text-[#B8AEA3]">Lanjutkan</p>

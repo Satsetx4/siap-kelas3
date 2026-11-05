@@ -18,13 +18,24 @@ function dataDasar(nama: string, sesiAktif: unknown = null) {
 
 async function tanam(page: Page, data: unknown) {
   await page.addInitScript((isi) => {
-    window.localStorage.setItem('sk3:data', isi);
+    if (!window.localStorage.getItem('sk3:data')) {
+      window.localStorage.setItem('sk3:data', isi);
+    }
   }, JSON.stringify(data));
 }
 
 /** Menyiapkan satu profil aktif di localStorage sebelum halaman dimuat. */
 export async function seedProfil(page: Page, nama = 'Ardi') {
   await tanam(page, dataDasar(nama));
+}
+
+/** Menyiapkan profil dengan satu soal di bank salah. */
+export async function seedBankSalah(page: Page) {
+  const data = dataDasar('Ardi');
+  (data.state.progres.p1 as Record<string, unknown>).soal = {
+    'uji-b01-s01-q001': { benar: 0, salah: 1, terakhir: 'salah', beruntunBenar: 0, diBankSalah: true, ts: 1 },
+  };
+  await tanam(page, data);
 }
 
 /** Menyiapkan sesi ujian yang waktunya sudah habis, untuk menguji pengumpulan otomatis. */

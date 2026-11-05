@@ -7,6 +7,7 @@ import { hitungNilai } from '../engine/nilai';
 import { cariSoal } from '../content/helpers';
 import { TIPE_DINILAI } from '../content/types';
 import { kunciHari } from '../lib/tanggal';
+import { lencanaBaru } from '../engine/lencana';
 
 export const MAKS_PROFIL = 5;
 
@@ -34,6 +35,8 @@ interface Aksi {
   tandaiRagu: (soalId: string) => void;
   selesaikanSesi: () => void;
   batalkanSesi: () => void;
+  lencanaBaru: string[];
+  bersihkanLencanaBaru: () => void;
   resetSemua: () => void;
 }
 
@@ -51,6 +54,9 @@ export const useApp = create<DataApp & Aksi>()(
   persist(
     (set, get) => ({
       ...dataAwal(),
+      lencanaBaru: [],
+
+      bersihkanLencanaBaru: () => set({ lencanaBaru: [] }),
 
       buatProfil: (nama, avatar) => {
         const { profil } = get();
@@ -110,6 +116,7 @@ export const useApp = create<DataApp & Aksi>()(
 
       cekJawaban: (soalId) => {
         const now = Date.now();
+        let baru: string[] = [];
         const perubahan = denganProgres(get, (p) => {
           const sesi = p.sesiAktif;
           if (!sesi || sesi.sudahDicek.includes(soalId)) return p;
@@ -125,9 +132,9 @@ export const useApp = create<DataApp & Aksi>()(
 
           if (soal.tipe !== 'uraian') {
             const lama = p.soal[soalId];
-            const baru = perbaruiStat(lama, hasil === true, now);
-            soalStat = { ...p.soal, [soalId]: baru };
-            if (lama?.diBankSalah && !baru.diBankSalah) {
+            const statBaru = perbaruiStat(lama, hasil === true, now);
+            soalStat = { ...p.soal, [soalId]: statBaru };
+            if (lama?.diBankSalah && !statBaru.diBankSalah) {
               hitung = { ...hitung, salahDibersihkan: hitung.salahDibersihkan + 1 };
             }
             if (soal.audio && hasil === true) {
@@ -135,15 +142,22 @@ export const useApp = create<DataApp & Aksi>()(
             }
           }
 
-          return {
+          const p2: ProgresProfil = {
             ...p,
             soal: soalStat,
             harian,
             hitung,
             sesiAktif: { ...sesi, sudahDicek: [...sesi.sudahDicek, soalId] },
           };
+
+          baru = lencanaBaru(p2, hari);
+          if (baru.length === 0) return p2;
+          return { ...p2, lencana: { ...p2.lencana, ...Object.fromEntries(baru.map((id) => [id, now])) } };
         });
-        if (perubahan) set(perubahan);
+        if (perubahan) {
+          set(perubahan);
+          if (baru.length) set({ lencanaBaru: baru });
+        }
       },
 
       pindahSoal: (indeks) => {
@@ -166,6 +180,7 @@ export const useApp = create<DataApp & Aksi>()(
 
       selesaikanSesi: () => {
         const now = Date.now();
+        let baru: string[] = [];
         const perubahan = denganProgres(get, (p) => {
           const sesi = p.sesiAktif;
           if (!sesi) return p;
@@ -201,7 +216,7 @@ export const useApp = create<DataApp & Aksi>()(
             ujianBabTerbaik[sesi.babIds[0]] = Math.max(lama, nilai);
           }
 
-          return {
+          const p2: ProgresProfil = {
             ...p,
             soal: soalStat,
             riwayat: [ringkasan, ...p.riwayat].slice(0, 50),
@@ -209,8 +224,15 @@ export const useApp = create<DataApp & Aksi>()(
             sesiTerakhir: { ...sesi, selesai: true },
             sesiAktif: null,
           };
+
+          baru = lencanaBaru(p2);
+          if (baru.length === 0) return p2;
+          return { ...p2, lencana: { ...p2.lencana, ...Object.fromEntries(baru.map((id) => [id, now])) } };
         });
-        if (perubahan) set(perubahan);
+        if (perubahan) {
+          set(perubahan);
+          if (baru.length) set({ lencanaBaru: baru });
+        }
       },
 
       batalkanSesi: () => {
@@ -227,6 +249,7 @@ export const useApp = create<DataApp & Aksi>()(
       name: 'sk3:data',
       version: 1,
       storage: createJSONStorage(() => safeStorage),
+      partialize: (s) => ({ profilAktifId: s.profilAktifId, profil: s.profil, progres: s.progres }),
       onRehydrateStorage: () => (_s, err) => {
         if (err) safeStorage.removeItem('sk3:data');
       },
