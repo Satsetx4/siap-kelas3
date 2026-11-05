@@ -12,7 +12,7 @@
 ---
 
 ## Status Saat Ini
-- **Tahap Aktif:** S5 selesai, berikutnya S6 (Alur latihan, hasil, pembahasan)
+- **Tahap Aktif:** S6 selesai, berikutnya S7 (Ujian bab & ujian gabungan)
 - **Lokasi Proyek:** `D:\!AGY\siap-kelas3`
 - **URL Produksi:** *(belum di-deploy, diisi pada S12)*
 
@@ -27,7 +27,7 @@
 - [x] **S3** — `safeStorage`, store Zustand (`useApp`, `usePref`), halaman Pilih & Buat Profil (`zod`)
 - [x] **S4** — Tipe isi (`types.ts`), helper, validator konten (`validasi.test.ts`), halaman Mapel, Bab, & Kartu Materi + TTS (`tts.ts`)
 - [x] **S5** — Mesin soal (`periksa`, `pilihSoal`, `nilai`, `rng`) & seluruh komponen jawaban (`pg`, `bs`, `isian`, `jodohkan`, `urutkan`, `uraian`, `Pembahasan`)
-- [ ] **S6** — Alur Latihan, dialog keluar/lanjut, halaman Hasil & Pembahasan, kartu Lanjutkan di Beranda
+- [x] **S6** — Alur Latihan, dialog keluar/lanjut, halaman Hasil & Pembahasan, kartu Lanjutkan di Beranda
 - [ ] **S7** — Mode Ujian Bab & Ujian Gabungan (timer absolut, ragu-ragu, grid nomor soal, nilai terbaik & bintang)
 - [ ] **S8** — Bank Soal Salah (`/ulang`), halaman Prestasi (`/prestasi`), target harian 10 soal, hari beruntun, & sistem lencana
 - [ ] **S9** — Area Orang Tua: gerbang perkalian (`/ortu`), Rapor detail (`/ortu/rapor`), Pengaturan, daftar "Kunci Perlu Dicek", & Reset Semua Data
@@ -59,6 +59,12 @@
 ---
 
 ## Log Sesi
+
+### 2026-11-04 — S6 Alur latihan, hasil, pembahasan (Selesai)
+- **Yang dikerjakan:** aksi sesi di store (`mulaiSesi`, `jawab`, `cekJawaban`, `pindahSoal`, `tandaiRagu`, `selesaikanSesi`, `batalkanSesi`), `lib/sesi.ts`, `lib/tanggal.ts`, `pages/Sesi.tsx` (dialog keluar, petunjuk, umpan balik, pembahasan), `pages/Hasil.tsx` (nilai berhitung, bintang, daftar pembahasan, Ulangi yang Salah), tombol mulai di `BabDetail` + `Materi`, kartu Lanjutkan di Beranda, infra e2e (`VITE_E2E`, `build:e2e`, `tests/e2e/bantu.ts`, `latihan.spec.ts`), tes `build-bersih`.
+- **Verifikasi:** `npm.cmd run cek` (43 unit test), `npm.cmd run e2e` 20 passed.
+- **Catatan:** bug ditemukan & diperbaiki — guard `Sesi` ikut redirect ke `/beranda` saat `sesiAktif` menjadi null setelah selesai; kini memakai state `keHasil`. Tes `build-bersih` membangun ulang produksi sendiri bila `dist` masih berisi build e2e.
+- **Sesi berikutnya:** **S7** (Ujian bab & ujian gabungan).
 
 ### 2026-11-04 — S5 Mesin soal & komponen jawaban (Selesai)
 - **Yang dikerjakan:** `lib/rng.ts` (mulberry32 + Fisher–Yates), `engine/periksa.ts` (normalisasi, periksa, jawabanLengkap, jawabanBenar), `engine/pilihSoal.ts` (latihan/ujian bab/gabungan/ulang + `buatAcak`), `engine/nilai.ts`, komponen `SoalPG/SoalBS/SoalIsian/SoalJodohkan/SoalUrutkan/SoalUraian/SoalView/Pembahasan/GambarSoal`.

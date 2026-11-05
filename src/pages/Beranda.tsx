@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { ShieldCheck } from 'lucide-react';
 import { useApp } from '../store/useApp';
 import { avatarDari } from '../lib/avatar';
+import { JUDUL_SESI } from '../lib/sesi';
 import AppHeader from '../components/layout/AppHeader';
 import Seo from '../components/layout/Seo';
 import ThemeToggle from '../components/layout/ThemeToggle';
@@ -9,6 +10,7 @@ import Card from '../components/ui/Card';
 
 export default function Beranda() {
   const { profil, profilAktifId } = useApp();
+  const progres = useApp((s) => (profilAktifId ? s.progres[profilAktifId] : undefined));
   const navigate = useNavigate();
   const aktif = profil.find((p) => p.id === profilAktifId);
 
@@ -43,7 +45,17 @@ export default function Beranda() {
           </>
         }
       />
-      <main className="p-4">
+      <main className="space-y-3 p-4">
+        {progres?.sesiAktif ? (
+          <Card onClick={() => navigate('/sesi')} interaktif>
+            <p className="text-base text-tinta-500 dark:text-[#B8AEA3]">Lanjutkan</p>
+            <p className="text-xl">{JUDUL_SESI[progres.sesiAktif.jenis]}</p>
+            <p className="mt-1 text-lg text-tinta-500 dark:text-[#B8AEA3]">
+              Soal {progres.sesiAktif.indeks + 1} dari {progres.sesiAktif.soalIds.length}
+            </p>
+          </Card>
+        ) : null}
+
         <Card>
           <h2 className="text-xl">Mau belajar apa hari ini?</h2>
           <p className="mt-2 text-lg text-tinta-500 dark:text-[#B8AEA3]">Pilih menu Mapel untuk mulai.</p>

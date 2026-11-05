@@ -11,6 +11,9 @@ import KartuMateri from '../components/materi/KartuMateri';
 import Button from '../components/ui/Button';
 import IconButton from '../components/ui/IconButton';
 import NotFound from './NotFound';
+import { pilihLatihan } from '../engine/pilihSoal';
+import { buatRng } from '../lib/rng';
+import { buatSesi } from '../lib/sesi';
 
 export default function Materi() {
   const { mapelId = '', babId = '', subBabId = '' } = useParams();
@@ -22,6 +25,8 @@ export default function Materi() {
   const profilAktifId = useApp((s) => s.profilAktifId);
   const posisiTersimpan = useApp((s) => (profilAktifId ? s.progres[profilAktifId]?.posisiMateri[subBabId] : undefined));
   const setPosisiMateri = useApp((s) => s.setPosisiMateri);
+  const mulaiSesi = useApp((s) => s.mulaiSesi);
+  const soalStat = useApp((s) => (profilAktifId ? s.progres[profilAktifId]?.soal : undefined));
   const [indeks, setIndeks] = useState(0);
 
   const kartu = useMemo(() => sub?.materi ?? [], [sub]);
@@ -95,7 +100,23 @@ export default function Materi() {
 
         {terakhir ? (
           <div className="mt-5 space-y-3">
-            <Button ukuran="lg" className="w-full" disabled>
+            <Button
+              ukuran="lg"
+              className="w-full"
+              disabled={sub.soal.length === 0}
+              onClick={() => {
+                const dipilih = pilihLatihan(sub.soal, soalStat ?? {}, buatRng(Date.now()));
+                if (dipilih.length === 0) return;
+                mulaiSesi(buatSesi({
+                  jenis: 'latihan',
+                  mapelId: mapel.id,
+                  babIds: [bab.id],
+                  filter: 'semua',
+                  soal: dipilih,
+                }));
+                navigate('/sesi');
+              }}
+            >
               Latihan Sub-bab Ini
             </Button>
             <Button varian="sekunder" className="w-full" onClick={() => navigate(`/mapel/${mapel.id}/bab/${bab.id}`)}>

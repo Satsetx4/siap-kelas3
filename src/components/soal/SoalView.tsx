@@ -37,7 +37,7 @@ export default function SoalView({ soal, acak, jawaban, sudahDicek, onJawab, lan
         <Badge warna="netral">{labelLevel[soal.level]}</Badge>
       </div>
 
-      {soal.pertanyaan ? <p className="text-lg leading-relaxed">{soal.pertanyaan}</p> : null}
+      {soal.pertanyaan ? <p data-uji="pertanyaan" className="text-lg leading-relaxed">{soal.pertanyaan}</p> : null}
       {soal.arab ? <TeksArab arab={soal.arab} /> : null}
       {soal.gambar ? <GambarSoal src={soal.gambar} alt={soal.gambarAlt ?? 'Gambar soal'} /> : null}
 

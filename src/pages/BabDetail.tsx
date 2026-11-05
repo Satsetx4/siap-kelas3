@@ -1,5 +1,5 @@
-import { useMemo } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useMemo, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { BookOpen, ClipboardCheck, FileText } from 'lucide-react';
 import { useCariMapel } from '../content/ContentProvider';
@@ -12,16 +12,22 @@ import Segmented from '../components/ui/Segmented';
 import NotFound from './NotFound';
 import { soalBab, soalDinilai } from '../content/helpers';
 import { bintangDariNilai } from '../lib/ringkasan';
+import { pilihLatihan } from '../engine/pilihSoal';
+import { buatRng } from '../lib/rng';
+import { buatSesi } from '../lib/sesi';
 
 type Tab = 'materi' | 'latihan' | 'ujian';
 
 export default function BabDetail() {
   const { mapelId = '', babId = '' } = useParams();
+  const navigate = useNavigate();
   const mapel = useCariMapel(mapelId);
   const bab = mapel?.bab.find((b) => b.id === babId);
   const profilAktifId = useApp((s) => s.profilAktifId);
   const progres = useApp((s) => (profilAktifId ? s.progres[profilAktifId] : undefined));
   const setTabBab = useApp((s) => s.setTabBab);
+  const mulaiSesi = useApp((s) => s.mulaiSesi);
+  const [filter, setFilter] = useState<'semua' | 'guru'>('semua');
 
   const tab: Tab = progres?.tabBab[babId] ?? 'materi';
   const nilaiTerbaik = progres?.ujianBabTerbaik[babId];
@@ -38,6 +44,20 @@ export default function BabDetail() {
   if (!mapel || !bab) return <NotFound />;
 
   const warna = mapel.warna === 'pai' ? 'pai' : mapel.warna === 'ing' ? 'ing' : 'jeruk';
+
+  const mulaiLatihan = () => {
+    const kumpulan = soalBab(bab, filter);
+    const dipilih = pilihLatihan(kumpulan, progres?.soal ?? {}, buatRng(Date.now()));
+    if (dipilih.length === 0) return;
+    mulaiSesi(buatSesi({
+      jenis: 'latihan',
+      mapelId: mapel.id,
+      babIds: [bab.id],
+      filter,
+      soal: dipilih,
+    }));
+    navigate('/sesi');
+  };
   const tanpaSoal = jumlah.dinilai === 0;
 
   return (
@@ -115,13 +135,13 @@ export default function BabDetail() {
             <Segmented
               label="Pilih jenis soal"
               opsi={[{ id: 'semua', label: 'Semua soal' }, { id: 'guru', label: 'Soal Guru saja' }]}
-              aktif="semua"
-              onPilih={() => { /* filter aktif disimpan di sesi, lihat S6 */ }}
+              aktif={filter}
+              onPilih={(id) => setFilter(id === 'guru' ? 'guru' : 'semua')}
             />
             <p className="text-lg text-tinta-500 dark:text-[#B8AEA3]">
-              Tersedia {jumlah.semua} soal, {jumlah.guru} di antaranya soal guru.
+              Tersedia {filter === 'guru' ? jumlah.guru : jumlah.semua} soal.
             </p>
-            <Button ukuran="lg" className="w-full" disabled>
+            <Button ukuran="lg" className="w-full" onClick={mulaiLatihan}>
               Mulai Latihan (10 soal)
             </Button>
           </section>

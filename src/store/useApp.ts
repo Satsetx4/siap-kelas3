@@ -1,7 +1,12 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { safeStorage, bersihkanSemua } from '../lib/safeStorage';
-import { dataAwal, progresKosong, type AvatarId, type DataApp, type StatSoal } from './types';
+import { dataAwal, progresKosong, type AvatarId, type DataApp, type Jawaban, type ProgresProfil, type Sesi, type StatSoal } from './types';
+import { periksa } from '../engine/periksa';
+import { hitungNilai } from '../engine/nilai';
+import { cariSoal } from '../content/helpers';
+import { TIPE_DINILAI } from '../content/types';
+import { kunciHari } from '../lib/tanggal';
 
 export const MAKS_PROFIL = 5;
 
@@ -22,7 +27,24 @@ interface Aksi {
   hapusProfil: (id: string) => void;
   setTabBab: (babId: string, tab: 'materi'|'latihan'|'ujian') => void;
   setPosisiMateri: (subBabId: string, indeks: number) => void;
+  mulaiSesi: (sesi: Sesi) => void;
+  jawab: (soalId: string, jawaban: Jawaban) => void;
+  cekJawaban: (soalId: string) => void;
+  pindahSoal: (indeks: number) => void;
+  tandaiRagu: (soalId: string) => void;
+  selesaikanSesi: () => void;
+  batalkanSesi: () => void;
   resetSemua: () => void;
+}
+
+function denganProgres(
+  get: () => DataApp,
+  ubah: (p: ProgresProfil) => ProgresProfil,
+): Partial<DataApp> | null {
+  const id = get().profilAktifId;
+  if (!id) return null;
+  const p = get().progres[id] ?? progresKosong();
+  return { progres: { ...get().progres, [id]: ubah(p) } };
 }
 
 export const useApp = create<DataApp & Aksi>()(
@@ -71,6 +93,129 @@ export const useApp = create<DataApp & Aksi>()(
         if (!id) return;
         const p = get().progres[id] ?? progresKosong();
         set({ progres: { ...get().progres, [id]: { ...p, posisiMateri: { ...p.posisiMateri, [subBabId]: indeks } } } });
+      },
+
+      mulaiSesi: (sesi) => {
+        const perubahan = denganProgres(get, (p) => ({ ...p, sesiAktif: sesi }));
+        if (perubahan) set(perubahan);
+      },
+
+      jawab: (soalId, jawaban) => {
+        const perubahan = denganProgres(get, (p) => {
+          if (!p.sesiAktif) return p;
+          return { ...p, sesiAktif: { ...p.sesiAktif, jawaban: { ...p.sesiAktif.jawaban, [soalId]: jawaban } } };
+        });
+        if (perubahan) set(perubahan);
+      },
+
+      cekJawaban: (soalId) => {
+        const now = Date.now();
+        const perubahan = denganProgres(get, (p) => {
+          const sesi = p.sesiAktif;
+          if (!sesi || sesi.sudahDicek.includes(soalId)) return p;
+          const soal = cariSoal(soalId);
+          const jawaban = sesi.jawaban[soalId];
+          if (!soal || !jawaban) return p;
+
+          const hasil = periksa(soal, jawaban);
+          const hari = kunciHari();
+          const harian = { ...p.harian, [hari]: (p.harian[hari] ?? 0) + 1 };
+          let soalStat = p.soal;
+          let hitung = p.hitung;
+
+          if (soal.tipe !== 'uraian') {
+            const lama = p.soal[soalId];
+            const baru = perbaruiStat(lama, hasil === true, now);
+            soalStat = { ...p.soal, [soalId]: baru };
+            if (lama?.diBankSalah && !baru.diBankSalah) {
+              hitung = { ...hitung, salahDibersihkan: hitung.salahDibersihkan + 1 };
+            }
+            if (soal.audio && hasil === true) {
+              hitung = { ...hitung, dengarBenar: hitung.dengarBenar + 1 };
+            }
+          }
+
+          return {
+            ...p,
+            soal: soalStat,
+            harian,
+            hitung,
+            sesiAktif: { ...sesi, sudahDicek: [...sesi.sudahDicek, soalId] },
+          };
+        });
+        if (perubahan) set(perubahan);
+      },
+
+      pindahSoal: (indeks) => {
+        const perubahan = denganProgres(get, (p) => {
+          if (!p.sesiAktif) return p;
+          return { ...p, sesiAktif: { ...p.sesiAktif, indeks } };
+        });
+        if (perubahan) set(perubahan);
+      },
+
+      tandaiRagu: (soalId) => {
+        const perubahan = denganProgres(get, (p) => {
+          const sesi = p.sesiAktif;
+          if (!sesi) return p;
+          const ragu = sesi.ragu.includes(soalId) ? sesi.ragu.filter((s) => s !== soalId) : [...sesi.ragu, soalId];
+          return { ...p, sesiAktif: { ...sesi, ragu } };
+        });
+        if (perubahan) set(perubahan);
+      },
+
+      selesaikanSesi: () => {
+        const now = Date.now();
+        const perubahan = denganProgres(get, (p) => {
+          const sesi = p.sesiAktif;
+          if (!sesi) return p;
+
+          const soalSesi = sesi.soalIds.map((id) => cariSoal(id)).filter((s): s is NonNullable<typeof s> => Boolean(s));
+          const dinilai = soalSesi.filter((s) => TIPE_DINILAI.includes(s.tipe));
+
+          let benar = 0;
+          const soalStat = { ...p.soal };
+          for (const soal of soalSesi) {
+            const j = sesi.jawaban[soal.id];
+            const hasil = j ? periksa(soal, j) : null;
+            if (hasil === true) benar += 1;
+            if (soal.tipe === 'uraian' || sesi.jenis === 'latihan' || sesi.jenis === 'ulang') continue;
+            soalStat[soal.id] = perbaruiStat(p.soal[soal.id], hasil === true, now);
+          }
+
+          const nilai = hitungNilai(benar, dinilai.length);
+          const ringkasan = {
+            id: sesi.id,
+            jenis: sesi.jenis,
+            mapelId: sesi.mapelId,
+            babIds: sesi.babIds,
+            nilai,
+            benar,
+            total: dinilai.length,
+            ts: now,
+          };
+
+          const ujianBabTerbaik = { ...p.ujianBabTerbaik };
+          if (sesi.jenis === 'ujian-bab' && sesi.babIds[0]) {
+            const lama = ujianBabTerbaik[sesi.babIds[0]] ?? -1;
+            ujianBabTerbaik[sesi.babIds[0]] = Math.max(lama, nilai);
+          }
+
+          return {
+            ...p,
+            soal: soalStat,
+            riwayat: [ringkasan, ...p.riwayat].slice(0, 50),
+            ujianBabTerbaik,
+            sesiTerakhir: { ...sesi, selesai: true },
+            sesiAktif: null,
+          };
+        });
+        if (perubahan) set(perubahan);
+      },
+
+      batalkanSesi: () => {
+        const perubahan = denganProgres(get, (p) => ({ ...p, sesiAktif: null }));
+        if (perubahan) set(perubahan);
       },
 
       resetSemua: () => {

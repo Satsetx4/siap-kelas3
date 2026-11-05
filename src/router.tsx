@@ -9,6 +9,8 @@ import MapelList from './pages/MapelList';
 import BabList from './pages/BabList';
 import BabDetail from './pages/BabDetail';
 import Materi from './pages/Materi';
+import Sesi from './pages/Sesi';
+import Hasil from './pages/Hasil';
 import { useApp } from './store/useApp';
 
 function Pengalih() {
@@ -35,8 +37,8 @@ export const router = createBrowserRouter([
       { path: '/mapel/:mapelId/bab/:babId', element: <BabDetail /> },
       { path: '/mapel/:mapelId/bab/:babId/materi/:subBabId', element: <Materi /> },
       { path: '/ujian-gabungan', element: <HalamanKerangka judul="Ujian Gabungan" backTo="/mapel" /> },
-      { path: '/sesi', element: <HalamanKerangka judul="Latihan" backTo="/beranda" /> },
-      { path: '/hasil', element: <HalamanKerangka judul="Hasil" backTo="/beranda" /> },
+      { path: '/sesi', element: <ButuhProfil><Sesi /></ButuhProfil> },
+      { path: '/hasil', element: <ButuhProfil><Hasil /></ButuhProfil> },
       { path: '/ulang', element: <HalamanKerangka judul="Ulang Soal Salah" backTo="/beranda" /> },
       { path: '/prestasi', element: <HalamanKerangka judul="Prestasi" backTo="/beranda" /> },
       { path: '/ortu', element: <HalamanKerangka judul="Area Orang Tua" backTo="/beranda" /> },
