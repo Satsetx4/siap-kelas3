@@ -12,7 +12,7 @@
 ---
 
 ## Status Saat Ini
-- **Tahap Aktif:** S3 selesai, berikutnya S4 (Tipe isi, validator, halaman mapel/bab/materi)
+- **Tahap Aktif:** S4 selesai, berikutnya S5 (Mesin soal & komponen jawaban)
 - **Lokasi Proyek:** `D:\!AGY\siap-kelas3`
 - **URL Produksi:** *(belum di-deploy, diisi pada S12)*
 
@@ -25,7 +25,7 @@
 - [x] **S1** — Fondasi desain: token warna `@theme`, font lokal, skrip anti-kedip tema, komponen UI dasar (`components/ui`)
 - [x] **S2** — Layout (`PageShell`, `AppHeader`, `MobileBottomNav`), router, `ErrorBoundary`, & halaman 404
 - [x] **S3** — `safeStorage`, store Zustand (`useApp`, `usePref`), halaman Pilih & Buat Profil (`zod`)
-- [ ] **S4** — Tipe isi (`types.ts`), helper, validator konten (`validasi.test.ts`), halaman Mapel, Bab, & Kartu Materi + TTS (`tts.ts`)
+- [x] **S4** — Tipe isi (`types.ts`), helper, validator konten (`validasi.test.ts`), halaman Mapel, Bab, & Kartu Materi + TTS (`tts.ts`)
 - [ ] **S5** — Mesin soal (`periksa`, `pilihSoal`, `nilai`, `rng`) & seluruh komponen jawaban (`pg`, `bs`, `isian`, `jodohkan`, `urutkan`, `uraian`, `Pembahasan`)
 - [ ] **S6** — Alur Latihan, dialog keluar/lanjut, halaman Hasil & Pembahasan, kartu Lanjutkan di Beranda
 - [ ] **S7** — Mode Ujian Bab & Ujian Gabungan (timer absolut, ragu-ragu, grid nomor soal, nilai terbaik & bintang)
@@ -59,6 +59,12 @@
 ---
 
 ## Log Sesi
+
+### 2026-11-04 — S4 Model isi & halaman mapel/bab/materi (Selesai)
+- **Yang dikerjakan:** `content/types.ts`, `helpers.ts`, `index.ts`, `pai/index.ts` & `inggris/index.ts` (`bab: []`), fixture `__uji__/mapelUji.ts` (2 bab, semua tipe soal & blok), validator `tests/content/validasi.test.ts` (pola ID, kunci, cakupan 15 soal per sub-bab modul), `lib/tts.ts`, `ContentProvider`, `TeksArab`, `TombolBacakan`, `BlokRenderer`, `KartuMateri`, halaman `MapelList`/`BabList`/`BabDetail`/`Materi`, `lib/ringkasan.ts`.
+- **Verifikasi:** `npm.cmd run cek` (21 unit test, termasuk validator), `npm.cmd run e2e` 18 passed.
+- **Catatan:** tombol mulai latihan/ujian masih `disabled` sesuai rencana (aktif di S6/S7). Fixture sengaja tanpa `gambar`; uji blok `gambar` memakai data URI di tes komponen.
+- **Sesi berikutnya:** **S5** (Mesin soal & komponen jawaban).
 
 ### 2026-11-04 — S3 Penyimpanan & profil (Selesai)
 - **Yang dikerjakan:** `safeStorage` (fallback memori + `bersihkanSemua`), `store/types.ts`, `useApp` (buat/pilih/ubah/hapus profil maks 5, `perbaruiStat`, setTabBab, setPosisiMateri, resetSemua, merge tahan data rusak), `usePref`, `lib/avatar.ts` (12 ikon), halaman `Profil`, `ProfilBaru` (zod), `Beranda` awal, router `/` pengalih + guard `ButuhProfil`.

@@ -5,6 +5,10 @@ import NotFound from './pages/NotFound';
 import Profil from './pages/Profil';
 import ProfilBaru from './pages/ProfilBaru';
 import Beranda from './pages/Beranda';
+import MapelList from './pages/MapelList';
+import BabList from './pages/BabList';
+import BabDetail from './pages/BabDetail';
+import Materi from './pages/Materi';
 import { useApp } from './store/useApp';
 
 function Pengalih() {
@@ -26,10 +30,10 @@ export const router = createBrowserRouter([
       { path: '/profil', element: <Profil /> },
       { path: '/profil/baru', element: <ProfilBaru /> },
       { path: '/beranda', element: <ButuhProfil><Beranda /></ButuhProfil> },
-      { path: '/mapel', element: <HalamanKerangka judul="Mata Pelajaran" backTo="/beranda" /> },
-      { path: '/mapel/:mapelId', element: <HalamanKerangka judul="Mata Pelajaran" backTo="/mapel" /> },
-      { path: '/mapel/:mapelId/bab/:babId', element: <HalamanKerangka judul="Bab" backTo="/mapel" /> },
-      { path: '/mapel/:mapelId/bab/:babId/materi/:subBabId', element: <HalamanKerangka judul="Materi" backTo="/mapel" /> },
+      { path: '/mapel', element: <MapelList /> },
+      { path: '/mapel/:mapelId', element: <BabList /> },
+      { path: '/mapel/:mapelId/bab/:babId', element: <BabDetail /> },
+      { path: '/mapel/:mapelId/bab/:babId/materi/:subBabId', element: <Materi /> },
       { path: '/ujian-gabungan', element: <HalamanKerangka judul="Ujian Gabungan" backTo="/mapel" /> },
       { path: '/sesi', element: <HalamanKerangka judul="Latihan" backTo="/beranda" /> },
       { path: '/hasil', element: <HalamanKerangka judul="Hasil" backTo="/beranda" /> },
