@@ -12,7 +12,7 @@
 ---
 
 ## Status Saat Ini
-- **Tahap Aktif:** S10 selesai, berikutnya S11 (konten) / S12 (QA & rilis)
+- **Tahap Aktif:** S11 — C0 selesai (inventaris PAI 8 bab, Inggris 1 bab). Berikutnya **C-PAI-01**
 - **Lokasi Proyek:** `D:\!AGY\siap-kelas3`
 - **URL Produksi:** *(belum di-deploy, diisi pada S12)*
 
@@ -36,9 +36,21 @@
 ### Tahap 2: Pengolahan Konten (S11 — dipecah per bab setelah bahan masuk)
 > Saat bahan guru untuk suatu mapel sudah ditaruh di `bahan/<mapel>/`, jalankan sesi `C0` untuk menyusun inventaris dan menambahkan baris `C-<MAPEL>-01`, `02`, dst. di bawah ini.
 
-- [ ] **C0-PAI** — Inventaris bahan PAI (`content-notes/pai/inventaris.md`) & daftar bab PAI
-- [ ] **C0-ING** — Inventaris bahan Bahasa Inggris (`content-notes/inggris/inventaris.md`) & daftar bab Bahasa Inggris
-*(Baris `C-PAI-01`, `C-ING-01`, dst. akan ditambahkan oleh agen pada sesi C0)*
+- [x] **C0-PAI** — Inventaris bahan PAI (`content-notes/pai/inventaris.md`) & daftar bab PAI
+- [x] **C0-ING** — Inventaris bahan Bahasa Inggris (`content-notes/inggris/inventaris.md`) & daftar bab Bahasa Inggris
+
+**PAI** (8 bab, semuanya MODUL — tidak ada soal guru di bahan):
+- [ ] **C-PAI-01** — Huruf Hijaiyah Bersambung & Mad Tabi'i
+- [ ] **C-PAI-02** — Surah Al-Kautsar
+- [ ] **C-PAI-03** — Huruf Hijaiyah Bersambung & Izhar Halqi
+- [ ] **C-PAI-04** — Hadis tentang Kewajiban Salat
+- [ ] **C-PAI-05** — Sifat-Sifat Allah Swt.
+- [ ] **C-PAI-06** — Iman kepada Kitab-Kitab Allah Swt.
+- [ ] **C-PAI-07** — Berbaik Sangka kepada Allah Swt.
+- [ ] **C-PAI-08** — Akhlak terhadap Orang Tua
+
+**Bahasa Inggris** (1 bab, LATIHAN — 15 soal guru, tanpa soal buatan):
+- [ ] **C-ING-01** — Classroom Commands
 
 ### Tahap 3: QA Akhir & Rilis (S12)
 - [ ] **S12** — Pemilihan nama final bersama user, QA visual menyeluruh (360px terang/gelap), deploy ke Vercel (`sekawan`), & verifikasi link live
@@ -60,6 +72,12 @@
 ---
 
 ## Log Sesi
+
+### 2026-11-06 — C0-PAI & C0-ING Inventaris bahan (Selesai)
+- **Yang dikerjakan:** pasang `tools/render_pdf.py`, `tools/ekstrak.py`, `tools/crop.py`; ekstrak kedua PDF ke `bahan/<mapel>/_ekstrak/` (PAI 9 halaman, Inggris 1 halaman); susun `content-notes/pai/inventaris.md` (8 bab, semua MODUL, 0 soal guru) dan `content-notes/inggris/inventaris.md` (1 bab LATIHAN, 15 soal guru, kunci ditentukan agen).
+- **Verifikasi:** struktur bab mengikuti judul di bahan; jumlah soal guru Inggris 15 sesuai worksheet (10 pg + 5 isian).
+- **Catatan:** dua sesi C0 dikerjakan berurutan dalam satu giliran karena bahannya kecil dan saling terkait. Teks Arab hasil ekstraksi PDF berantakan — setiap teks Arab wajib dicek ulang dari gambar halaman (`bahan/pai/_ekstrak/halaman/`).
+- **Sesi berikutnya:** **C-PAI-01** (Huruf Hijaiyah Bersambung & Mad Tabi'i).
 
 ### 2026-11-06 — S10 SEO, PWA, ikon, analitik, Lighthouse (Selesai)
 - **Yang dikerjakan:** `public/robots.txt` (Disallow `/ortu`) + `public/sitemap.xml`, `lib/situs.ts` (SITE_URL dipakai `Seo`), `lib/analytics.ts` + panggilan `track` (profil_dibuat, mulai_sesi, selesai_sesi), ikon PWA via `npm.cmd run ikon`, `public/og.png` 1200×630 dari `tools/og.mjs`, `tools/serve-prod.mjs` (server statis gzip untuk audit), e2e `offline.spec.ts` (offline setelah kunjungan pertama + manifest/robots/sitemap).
