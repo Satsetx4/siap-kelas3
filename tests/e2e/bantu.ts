@@ -38,6 +38,13 @@ export async function seedBankSalah(page: Page) {
   await tanam(page, data);
 }
 
+/** Membuka gerbang orang tua tanpa menjawab perkalian. */
+export async function seedOrtu(page: Page) {
+  await page.addInitScript(() => {
+    window.sessionStorage.setItem('sk3:ortu', '1');
+  });
+}
+
 /** Menyiapkan sesi ujian yang waktunya sudah habis, untuk menguji pengumpulan otomatis. */
 export async function seedSesiKedaluwarsa(page: Page) {
   const sesi = {

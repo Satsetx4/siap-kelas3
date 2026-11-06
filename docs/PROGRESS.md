@@ -12,7 +12,7 @@
 ---
 
 ## Status Saat Ini
-- **Tahap Aktif:** S8 selesai, berikutnya S9 (Area Orang Tua)
+- **Tahap Aktif:** S9 selesai, berikutnya S10 (SEO, PWA, ikon, analitik, Lighthouse)
 - **Lokasi Proyek:** `D:\!AGY\siap-kelas3`
 - **URL Produksi:** *(belum di-deploy, diisi pada S12)*
 
@@ -30,7 +30,7 @@
 - [x] **S6** — Alur Latihan, dialog keluar/lanjut, halaman Hasil & Pembahasan, kartu Lanjutkan di Beranda
 - [x] **S7** — Mode Ujian Bab & Ujian Gabungan (timer absolut, ragu-ragu, grid nomor soal, nilai terbaik & bintang)
 - [x] **S8** — Bank Soal Salah (`/ulang`), halaman Prestasi (`/prestasi`), target harian 10 soal, hari beruntun, & sistem lencana
-- [ ] **S9** — Area Orang Tua: gerbang perkalian (`/ortu`), Rapor detail (`/ortu/rapor`), Pengaturan, daftar "Kunci Perlu Dicek", & Reset Semua Data
+- [x] **S9** — Area Orang Tua: gerbang perkalian (`/ortu`), Rapor detail (`/ortu/rapor`), Pengaturan, daftar "Kunci Perlu Dicek", & Reset Semua Data
 - [ ] **S10** — SEO (`robots.txt`, `sitemap.xml`, `Seo`), ikon PWA, gambar OG, analitik, uji offline, & audit Lighthouse
 
 ### Tahap 2: Pengolahan Konten (S11 — dipecah per bab setelah bahan masuk)
@@ -59,6 +59,12 @@
 ---
 
 ## Log Sesi
+
+### 2026-11-04 — S9 Area Orang Tua (Selesai)
+- **Yang dikerjakan:** `pages/OrtuGerbang.tsx` (perkalian a=12..29 × b=3..9, salah → goyang + soal baru, benar → `sessionStorage sk3:ortu`), guard `ButuhOrtu` di router, `pages/OrtuRapor.tsx` (pilih anak, penguasaan + label "Perlu diulang" < 70%, nilai terbaik, 10 soal sering salah, riwayat 20 sesi, aktivitas 14 hari), `pages/OrtuPengaturan.tsx` (ubah nama/avatar, hapus profil, suara, kecepatan, tema, "Kunci Perlu Dicek", reset 2 langkah ketik `HAPUS`, versi), `lib/versi.ts`.
+- **Verifikasi:** `npm.cmd run cek` (56 unit test), `npm.cmd run e2e` 34 passed.
+- **Catatan:** dua bug UI nyata ditemukan & diperbaiki — (1) `Dialog` dirender di dalam `motion.div` halaman yang bertransformasi sehingga `position: fixed` tidak mengacu viewport; kini memakai `createPortal` ke `document.body`; (2) panel dialog kini `max-h-[90dvh]` + scroll agar tombol tidak terpotong di layar HP. Tombol `Button` juga tidak lagi memakai hover-lift (hanya `whileTap`) agar target ketuk stabil.
+- **Sesi berikutnya:** **S10** (SEO, PWA, ikon, analitik, Lighthouse).
 
 ### 2026-11-04 — S8 Bank salah, prestasi, target harian, lencana (Selesai)
 - **Yang dikerjakan:** `engine/lencana.ts` (8 lencana, `hariBeruntun`, `evaluasiLencana`, `lencanaBaru`), evaluasi lencana di `cekJawaban`/`selesaikanSesi` + `lencanaBaru` transien (dikecualikan dari `partialize`), `ToastLencana`, `pages/Ulang.tsx`, `pages/Prestasi.tsx` (target, kalender 14 hari, lencana, bintang per mapel), kartu Target Hari Ini di Beranda, badge jumlah soal salah di bottom nav.

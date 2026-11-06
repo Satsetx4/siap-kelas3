@@ -1,6 +1,5 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import PageShell from './components/layout/PageShell';
-import HalamanKerangka from './pages/HalamanKerangka';
 import NotFound from './pages/NotFound';
 import Profil from './pages/Profil';
 import ProfilBaru from './pages/ProfilBaru';
@@ -14,6 +13,9 @@ import Hasil from './pages/Hasil';
 import UjianGabungan from './pages/UjianGabungan';
 import Ulang from './pages/Ulang';
 import Prestasi from './pages/Prestasi';
+import OrtuGerbang from './pages/OrtuGerbang';
+import OrtuRapor from './pages/OrtuRapor';
+import OrtuPengaturan from './pages/OrtuPengaturan';
 import { useApp } from './store/useApp';
 
 function Pengalih() {
@@ -24,6 +26,13 @@ function Pengalih() {
 function ButuhProfil({ children }: { children: React.ReactNode }) {
   const profilAktifId = useApp((s) => s.profilAktifId);
   if (!profilAktifId) return <Navigate to="/profil" replace />;
+  return <>{children}</>;
+}
+
+function ButuhOrtu({ children }: { children: React.ReactNode }) {
+  let lolos = false;
+  try { lolos = window.sessionStorage.getItem('sk3:ortu') === '1'; } catch { lolos = false; }
+  if (!lolos) return <Navigate to="/ortu" replace />;
   return <>{children}</>;
 }
 
@@ -44,9 +53,9 @@ export const router = createBrowserRouter([
       { path: '/hasil', element: <ButuhProfil><Hasil /></ButuhProfil> },
       { path: '/ulang', element: <ButuhProfil><Ulang /></ButuhProfil> },
       { path: '/prestasi', element: <ButuhProfil><Prestasi /></ButuhProfil> },
-      { path: '/ortu', element: <HalamanKerangka judul="Area Orang Tua" backTo="/beranda" /> },
-      { path: '/ortu/rapor', element: <HalamanKerangka judul="Rapor" backTo="/ortu" /> },
-      { path: '/ortu/pengaturan', element: <HalamanKerangka judul="Pengaturan" backTo="/ortu" /> },
+      { path: '/ortu', element: <OrtuGerbang /> },
+      { path: '/ortu/rapor', element: <ButuhOrtu><OrtuRapor /></ButuhOrtu> },
+      { path: '/ortu/pengaturan', element: <ButuhOrtu><OrtuPengaturan /></ButuhOrtu> },
       { path: '*', element: <NotFound /> },
     ],
   },

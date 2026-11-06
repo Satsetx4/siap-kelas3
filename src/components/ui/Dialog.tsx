@@ -1,4 +1,5 @@
 import { useEffect, useRef, type ReactNode } from 'react';
+import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import IconButton from './IconButton';
 import Button from './Button';
@@ -31,7 +32,7 @@ export default function Dialog({ buka, judul, onTutup, children, teksBatal = 'Ba
 
   if (!buka) return null;
 
-  return (
+  return createPortal(
     <div
       className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 sm:items-center sm:p-4"
       onClick={onTutup}
@@ -43,7 +44,7 @@ export default function Dialog({ buka, judul, onTutup, children, teksBatal = 'Ba
         aria-modal="true"
         aria-label={judul}
         tabIndex={-1}
-        className="w-full max-w-md rounded-t-3xl bg-white p-5 outline-none dark:bg-malam-900 sm:rounded-3xl"
+        className="max-h-[90dvh] w-full max-w-md overflow-y-auto rounded-t-3xl bg-white p-5 outline-none dark:bg-malam-900 sm:rounded-3xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mb-4 flex items-center justify-between">
@@ -59,6 +60,7 @@ export default function Dialog({ buka, judul, onTutup, children, teksBatal = 'Ba
           </Button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

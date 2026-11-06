@@ -1,6 +1,5 @@
 import { motion } from 'motion/react';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
-import { tekan } from '../../lib/motion';
 
 type Varian = 'primer' | 'sekunder' | 'hantu' | 'bahaya';
 type Ukuran = 'md' | 'lg';
@@ -26,8 +25,7 @@ const gayaUkuran: Record<Ukuran, string> = {
 export default function Button({ varian = 'primer', ukuran = 'md', ikonKiri, children, className = '', disabled, ...sisa }: Props) {
   return (
     <motion.button
-      {...tekan}
-      animate={undefined}
+      whileTap={{ scale: 0.96 }}
       className={`inline-flex items-center justify-center gap-2 rounded-2xl font-display font-medium focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-jeruk-500 ${gayaVarian[varian]} ${gayaUkuran[ukuran]} ${disabled ? 'opacity-50' : ''} ${className}`}
       disabled={disabled}
       {...(sisa as object)}
