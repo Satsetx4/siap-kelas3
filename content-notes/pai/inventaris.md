@@ -73,3 +73,21 @@ Soal guru: 0
 1. **Teks Arab pada PDF tidak dapat disalin langsung.** Hasil ekstraksi teks membuat huruf Arab berantakan (urutan huruf dan harakat bergeser). Setiap teks Arab wajib dibandingkan dengan gambar halaman (`bahan/pai/_ekstrak/halaman/*.png`) sebelum diketik, dan ayat Al-Qur'an dicocokkan dengan sumber resmi.
 2. Bahan tidak memuat latihan soal, sehingga tidak ada soal guru yang perlu dipetakan.
 3. Beberapa tabel pada PDF (sifat Allah, kitab Allah) terpotong saat ekstraksi teks; isi tabel dibaca ulang dari gambar halaman saat sesi bab terkait.
+
+## Cakupan materi pai-b01
+
+| Gagasan di kartu materi | Soal yang menguji |
+|---|---|
+| Huruf hijaiyah dipakai membaca/menulis Al-Qur'an | q001 |
+| Huruf boleh terpisah dan bersambung | q006, q011 |
+| Bentuk huruf berubah sesuai letak | q011 |
+| Contoh kata bersambung (kataba, alima, muslimun) | q002, q005, q010 |
+| Pengertian Mad Tabi'i (panjang dua harakat) | q003, q017 |
+| Fathah bertemu alif | q004, q007, q016 |
+| Kasrah bertemu ya sukun | q008, q009, q013 |
+| Dhammah bertemu wau sukun | q012, q014, q016 |
+| Langkah membaca huruf bersambung | q015 |
+
+**Jumlah soal pai-b01-s01:** 16 soal dinilai (7 pg, 4 bs, 3 isian, 1 jodohkan, 1 urutkan) + 1 uraian.
+**Level:** 6 mudah, 6 sedang, 4 menantang.
+**Teks Arab:** sudah dicocokkan dengan gambar halaman 1 bahan (`_ekstrak/halaman/...-hal001.png`).

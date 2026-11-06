@@ -12,7 +12,7 @@
 ---
 
 ## Status Saat Ini
-- **Tahap Aktif:** S11 — C0 selesai (inventaris PAI 8 bab, Inggris 1 bab). Berikutnya **C-PAI-01**
+- **Tahap Aktif:** S11 — bab 1 PAI selesai. Berikutnya **C-PAI-02** (Surah Al-Kautsar)
 - **Lokasi Proyek:** `D:\!AGY\siap-kelas3`
 - **URL Produksi:** *(belum di-deploy, diisi pada S12)*
 
@@ -40,7 +40,7 @@
 - [x] **C0-ING** — Inventaris bahan Bahasa Inggris (`content-notes/inggris/inventaris.md`) & daftar bab Bahasa Inggris
 
 **PAI** (8 bab, semuanya MODUL — tidak ada soal guru di bahan):
-- [ ] **C-PAI-01** — Huruf Hijaiyah Bersambung & Mad Tabi'i
+- [x] **C-PAI-01** — Huruf Hijaiyah Bersambung & Mad Tabi'i
 - [ ] **C-PAI-02** — Surah Al-Kautsar
 - [ ] **C-PAI-03** — Huruf Hijaiyah Bersambung & Izhar Halqi
 - [ ] **C-PAI-04** — Hadis tentang Kewajiban Salat
@@ -72,6 +72,13 @@
 ---
 
 ## Log Sesi
+
+### 2026-11-06 — C-PAI-01 Huruf Hijaiyah Bersambung & Mad Tabi'i (Selesai)
+- **Yang dikerjakan:** `src/content/pai/bab-01.ts` (5 kartu materi, 16 soal dinilai + 1 uraian), daftarkan di `src/content/pai/index.ts`, tambah `tests/e2e/konten.spec.ts` (parametris per bab).
+- **Teks Arab:** diverifikasi dari gambar halaman 1 bahan: كَتَبَ / عَلِمَ / مُسْلِمٌ / قَالَ / فِي / يَقُولُ.
+- **Verifikasi:** `npm.cmd run test:konten` lulus, `npm.cmd run cek` (56 unit test), e2e `konten.spec.ts` + `mapel.spec.ts` 6 passed.
+- **Catatan:** e2e "mapel tanpa bab" dipindah ke `/mapel/inggris` karena PAI kini punya bab.
+- **Sesi berikutnya:** **C-PAI-02** (Surah Al-Kautsar).
 
 ### 2026-11-06 — C0-PAI & C0-ING Inventaris bahan (Selesai)
 - **Yang dikerjakan:** pasang `tools/render_pdf.py`, `tools/ekstrak.py`, `tools/crop.py`; ekstrak kedua PDF ke `bahan/<mapel>/_ekstrak/` (PAI 9 halaman, Inggris 1 halaman); susun `content-notes/pai/inventaris.md` (8 bab, semua MODUL, 0 soal guru) dan `content-notes/inggris/inventaris.md` (1 bab LATIHAN, 15 soal guru, kunci ditentukan agen).

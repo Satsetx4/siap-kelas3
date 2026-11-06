@@ -3,7 +3,7 @@ import { seedProfil } from './bantu';
 
 test('mapel tanpa bab menampilkan pesan siap disiapkan dan tombol kembali', async ({ page }) => {
   await seedProfil(page);
-  await page.goto('/mapel/pai');
+  await page.goto('/mapel/inggris');
   await expect(page.getByText('Materi sedang disiapkan.')).toBeVisible();
 
   await page.getByRole('button', { name: 'Kembali ke Mapel' }).click();
