@@ -15,6 +15,7 @@ import { bintangDariNilai } from '../lib/ringkasan';
 import { pilihLatihan, pilihUjianBab } from '../engine/pilihSoal';
 import { buatRng } from '../lib/rng';
 import { buatSesi } from '../lib/sesi';
+import { track } from '../lib/analytics';
 
 type Tab = 'materi' | 'latihan' | 'ujian';
 
@@ -56,6 +57,7 @@ export default function BabDetail() {
       filter,
       soal: dipilih,
     }));
+    track({ nama: 'mulai_sesi', jenis: 'latihan', mapel: mapel.id });
     navigate('/sesi');
   };
   const mulaiUjianBab = () => {
@@ -69,6 +71,7 @@ export default function BabDetail() {
       soal: dipilih,
       durasiMenit: 30,
     }));
+    track({ nama: 'mulai_sesi', jenis: 'ujian-bab', mapel: mapel.id });
     navigate('/sesi');
   };
   const tanpaSoal = jumlah.dinilai === 0;

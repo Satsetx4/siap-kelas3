@@ -11,6 +11,7 @@ import { pilihUjianGabungan } from '../engine/pilihSoal';
 import { buatRng } from '../lib/rng';
 import { buatSesi } from '../lib/sesi';
 import { TIPE_DINILAI } from '../content/types';
+import { track } from '../lib/analytics';
 
 export default function UjianGabungan() {
   const mapelSemua = useMapel();
@@ -47,6 +48,7 @@ export default function UjianGabungan() {
       soal,
       durasiMenit: 30,
     }));
+    track({ nama: 'mulai_sesi', jenis: 'ujian-gabungan', mapel: mapel.id });
     navigate('/sesi');
   };
 

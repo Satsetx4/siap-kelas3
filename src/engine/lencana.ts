@@ -1,4 +1,3 @@
-import { Footprints, Flame, CalendarCheck, Medal, Crown, Eraser, Ear, Target } from 'lucide-react';
 import type { ProgresProfil } from '../store/types';
 import { geserHari, kunciHari } from '../lib/tanggal';
 
@@ -7,19 +6,18 @@ export const TARGET_HARIAN = 10;
 export interface Lencana {
   id: string;
   nama: string;
-  Ikon: typeof Footprints;
   syarat: string;
 }
 
 export const DAFTAR_LENCANA: Lencana[] = [
-  { id: 'langkah-pertama', nama: 'Langkah Pertama', Ikon: Footprints, syarat: 'Menjawab 1 soal' },
-  { id: 'rajin-3', nama: 'Rajin 3 Hari', Ikon: Flame, syarat: 'Belajar 3 hari berturut-turut' },
-  { id: 'rajin-7', nama: 'Rajin Seminggu', Ikon: CalendarCheck, syarat: 'Belajar 7 hari berturut-turut' },
-  { id: 'nilai-sempurna', nama: 'Nilai Sempurna', Ikon: Medal, syarat: 'Nilai 100 di ujian' },
-  { id: 'penakluk-bab', nama: 'Penakluk Bab', Ikon: Crown, syarat: '3 bintang di satu bab' },
-  { id: 'pembasmi-salah', nama: 'Pembasmi Salah', Ikon: Eraser, syarat: '10 soal salah diperbaiki' },
-  { id: 'telinga-hebat', nama: 'Telinga Hebat', Ikon: Ear, syarat: '10 soal dengar dijawab benar' },
-  { id: 'seratus-soal', nama: '100 Soal', Ikon: Target, syarat: 'Menjawab 100 soal' },
+  { id: 'langkah-pertama', nama: 'Langkah Pertama', syarat: 'Menjawab 1 soal' },
+  { id: 'rajin-3', nama: 'Rajin 3 Hari', syarat: 'Belajar 3 hari berturut-turut' },
+  { id: 'rajin-7', nama: 'Rajin Seminggu', syarat: 'Belajar 7 hari berturut-turut' },
+  { id: 'nilai-sempurna', nama: 'Nilai Sempurna', syarat: 'Nilai 100 di ujian' },
+  { id: 'penakluk-bab', nama: 'Penakluk Bab', syarat: '3 bintang di satu bab' },
+  { id: 'pembasmi-salah', nama: 'Pembasmi Salah', syarat: '10 soal salah diperbaiki' },
+  { id: 'telinga-hebat', nama: 'Telinga Hebat', syarat: '10 soal dengar dijawab benar' },
+  { id: 'seratus-soal', nama: '100 Soal', syarat: 'Menjawab 100 soal' },
 ];
 
 /** Jumlah hari berturut-turut dengan target harian tercapai. */
@@ -29,7 +27,7 @@ export function hariBeruntun(harian: Record<string, number>, hariIni: string = k
   let jumlah = 0;
 
   const hariIniCapai = (harian[hariIni] ?? 0) >= TARGET_HARIAN;
-  let mulai = hariIniCapai ? 0 : -1;
+  const mulai = hariIniCapai ? 0 : -1;
 
   for (let i = mulai; i > -400; i -= 1) {
     const kunci = kunciHari(geserHari(dasar, i));

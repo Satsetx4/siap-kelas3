@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-
-const SITE_URL = 'https://siap-kelas3.vercel.app';
+import { SITE_URL } from '../../lib/situs';
 
 interface Props {
   judul: string;

@@ -13,6 +13,7 @@ import { jawabanBenar, periksa } from '../engine/periksa';
 import { hitungNilai, bintang } from '../engine/nilai';
 import { TIPE_DINILAI } from '../content/types';
 import { buatSesi } from '../lib/sesi';
+import { track } from '../lib/analytics';
 
 function AngkaNaik({ nilai }: { nilai: number }) {
   const [tampil, setTampil] = useState(0);
@@ -38,6 +39,23 @@ export default function Hasil() {
   const [lihatPembahasan, setLihatPembahasan] = useState(false);
 
   const sesi = progres?.sesiTerakhir ?? null;
+
+  useEffect(() => {
+    if (!sesi) return;
+    const dinilai = sesi.soalIds
+      .map((id) => cariSoal(id))
+      .filter((s): s is NonNullable<typeof s> => Boolean(s))
+      .filter((s) => TIPE_DINILAI.includes(s.tipe));
+    const benar = sesi.soalIds
+      .map((id) => cariSoal(id))
+      .filter((s): s is NonNullable<typeof s> => Boolean(s))
+      .filter((s) => {
+        const j = sesi.jawaban[s.id];
+        return j ? periksa(s, j) === true : false;
+      }).length;
+    track({ nama: 'selesai_sesi', jenis: sesi.jenis, nilai: hitungNilai(benar, dinilai.length) });
+  }, [sesi?.id]);
+
   if (!sesi) return <Navigate to="/beranda" replace />;
 
   const soalSesi = sesi.soalIds.map((id) => cariSoal(id)).filter((s): s is NonNullable<typeof s> => Boolean(s));

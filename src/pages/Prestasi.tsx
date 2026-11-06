@@ -6,6 +6,7 @@ import ProgressRing from '../components/ui/ProgressRing';
 import ProgressBar from '../components/ui/ProgressBar';
 import Stars from '../components/ui/Stars';
 import { DAFTAR_LENCANA, TARGET_HARIAN, hariBeruntun } from '../engine/lencana';
+import { ikonLencana } from '../components/lencana/ikonLencana';
 import { bintangDariNilai, penguasaanBab } from '../lib/ringkasan';
 import { geserHari, kunciHari, formatTanggal } from '../lib/tanggal';
 
@@ -68,7 +69,7 @@ export default function Prestasi() {
               return (
                 <li key={l.id} className={`flex items-center gap-3 rounded-2xl p-3 ${dapat ? 'bg-krem-100 dark:bg-malam-800' : 'opacity-60'}`}>
                   <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full ${dapat ? 'bg-jeruk-500 text-tinta-900' : 'bg-krem-200 text-tinta-500 dark:bg-malam-700'}`}>
-                    <l.Ikon size={22} aria-hidden="true" />
+                    {(() => { const Ikon = ikonLencana(l.id); return <Ikon size={22} aria-hidden="true" />; })()}
                   </span>
                   <span>
                     <span className="block text-lg">{l.nama}</span>

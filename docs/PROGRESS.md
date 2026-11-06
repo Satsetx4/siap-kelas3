@@ -12,7 +12,7 @@
 ---
 
 ## Status Saat Ini
-- **Tahap Aktif:** S9 selesai, berikutnya S10 (SEO, PWA, ikon, analitik, Lighthouse)
+- **Tahap Aktif:** S10 selesai, berikutnya S11 (konten) / S12 (QA & rilis)
 - **Lokasi Proyek:** `D:\!AGY\siap-kelas3`
 - **URL Produksi:** *(belum di-deploy, diisi pada S12)*
 
@@ -31,7 +31,7 @@
 - [x] **S7** — Mode Ujian Bab & Ujian Gabungan (timer absolut, ragu-ragu, grid nomor soal, nilai terbaik & bintang)
 - [x] **S8** — Bank Soal Salah (`/ulang`), halaman Prestasi (`/prestasi`), target harian 10 soal, hari beruntun, & sistem lencana
 - [x] **S9** — Area Orang Tua: gerbang perkalian (`/ortu`), Rapor detail (`/ortu/rapor`), Pengaturan, daftar "Kunci Perlu Dicek", & Reset Semua Data
-- [ ] **S10** — SEO (`robots.txt`, `sitemap.xml`, `Seo`), ikon PWA, gambar OG, analitik, uji offline, & audit Lighthouse
+- [x] **S10** — SEO (`robots.txt`, `sitemap.xml`, `Seo`), ikon PWA, gambar OG, analitik, uji offline, & audit Lighthouse
 
 ### Tahap 2: Pengolahan Konten (S11 — dipecah per bab setelah bahan masuk)
 > Saat bahan guru untuk suatu mapel sudah ditaruh di `bahan/<mapel>/`, jalankan sesi `C0` untuk menyusun inventaris dan menambahkan baris `C-<MAPEL>-01`, `02`, dst. di bawah ini.
@@ -51,14 +51,21 @@
 ---
 
 ## Catatan Skor Lighthouse (Diisi pada S10)
-- Performance: `-`
-- Accessibility: `-`
-- Best Practices: `-`
-- SEO: `-`
+- Performance: `91`
+- Accessibility: `100`
+- Best Practices: `100`
+- SEO: `100`
+- Catatan: diukur pada build produksi yang disajikan `tools/serve-prod.mjs` (gzip + cache, mirip Vercel), 2026-11-06.
 
 ---
 
 ## Log Sesi
+
+### 2026-11-06 — S10 SEO, PWA, ikon, analitik, Lighthouse (Selesai)
+- **Yang dikerjakan:** `public/robots.txt` (Disallow `/ortu`) + `public/sitemap.xml`, `lib/situs.ts` (SITE_URL dipakai `Seo`), `lib/analytics.ts` + panggilan `track` (profil_dibuat, mulai_sesi, selesai_sesi), ikon PWA via `npm.cmd run ikon`, `public/og.png` 1200×630 dari `tools/og.mjs`, `tools/serve-prod.mjs` (server statis gzip untuk audit), e2e `offline.spec.ts` (offline setelah kunjungan pertama + manifest/robots/sitemap).
+- **Optimasi performa:** route dipecah dengan `React.lazy` (Beranda/Profil/ProfilBaru tetap eager), validasi zod dimuat saat submit, analitik dimuat 1,2 dtk setelah render, font hanya subset yang dipakai.
+- **Verifikasi:** `npm.cmd run cek` (56 unit test), `npm.cmd run e2e` 38 passed, Lighthouse Performance 91 / Accessibility 100 / Best Practices 100 / SEO 100.
+- **Sesi berikutnya:** **S11** (konten per bab) — bahan PAI & Inggris sudah tersedia di `bahan/`.
 
 ### 2026-11-04 — S9 Area Orang Tua (Selesai)
 - **Yang dikerjakan:** `pages/OrtuGerbang.tsx` (perkalian a=12..29 × b=3..9, salah → goyang + soal baru, benar → `sessionStorage sk3:ortu`), guard `ButuhOrtu` di router, `pages/OrtuRapor.tsx` (pilih anak, penguasaan + label "Perlu diulang" < 70%, nilai terbaik, 10 soal sering salah, riwayat 20 sesi, aktivitas 14 hari), `pages/OrtuPengaturan.tsx` (ubah nama/avatar, hapus profil, suara, kecepatan, tema, "Kunci Perlu Dicek", reset 2 langkah ketik `HAPUS`, versi), `lib/versi.ts`.

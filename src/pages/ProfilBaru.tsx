@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { z } from 'zod';
 import { motion } from 'motion/react';
 import { useApp, MAKS_PROFIL } from '../store/useApp';
 import { DAFTAR_AVATAR } from '../lib/avatar';
@@ -9,13 +8,20 @@ import AppHeader from '../components/layout/AppHeader';
 import Seo from '../components/layout/Seo';
 import Button from '../components/ui/Button';
 import { tekan } from '../lib/motion';
+import { track } from '../lib/analytics';
 
-const skemaNama = z
-  .string()
-  .trim()
-  .min(1, 'Tulis nama dulu ya')
-  .max(20, 'Nama maksimal 20 huruf')
-  .regex(/^[\p{L} ]+$/u, 'Pakai huruf saja ya');
+/** Validasi memakai zod, dimuat saat dibutuhkan agar bundel awal tetap kecil. */
+async function validasiNama(nama: string): Promise<{ ok: true; nilai: string } | { ok: false; pesan: string }> {
+  const { z } = await import('zod');
+  const skema = z
+    .string()
+    .trim()
+    .min(1, 'Tulis nama dulu ya')
+    .max(20, 'Nama maksimal 20 huruf')
+    .regex(/^[\p{L} ]+$/u, 'Pakai huruf saja ya');
+  const hasil = skema.safeParse(nama);
+  return hasil.success ? { ok: true, nilai: hasil.data } : { ok: false, pesan: hasil.error.issues[0].message };
+}
 
 export default function ProfilBaru() {
   const { profil, buatProfil } = useApp();
@@ -23,21 +29,28 @@ export default function ProfilBaru() {
   const [nama, setNama] = useState('');
   const [avatar, setAvatar] = useState<AvatarId>('Cat');
   const [pesan, setPesan] = useState('');
+  const [memproses, setMemproses] = useState(false);
 
-  const simpan = (e: React.FormEvent) => {
+  const simpan = async (e: React.FormEvent) => {
     e.preventDefault();
-    const hasil = skemaNama.safeParse(nama);
-    if (!hasil.success) {
-      setPesan(hasil.error.issues[0].message);
+    if (memproses) return;
+    setMemproses(true);
+    const hasil = await validasiNama(nama);
+    setMemproses(false);
+
+    if (!hasil.ok) {
+      setPesan(hasil.pesan);
       return;
     }
     if (profil.length >= MAKS_PROFIL) {
       setPesan('Profil sudah penuh, maksimal 5.');
       return;
     }
-    const id = buatProfil(hasil.data, avatar);
-    if (id) navigate('/beranda', { replace: true });
-    else setPesan('Profil sudah penuh, maksimal 5.');
+    const id = buatProfil(hasil.nilai, avatar);
+    if (id) {
+      track({ nama: 'profil_dibuat' });
+      navigate('/beranda', { replace: true });
+    } else setPesan('Profil sudah penuh, maksimal 5.');
   };
 
   return (
