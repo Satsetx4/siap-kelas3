@@ -1,13 +1,12 @@
 import { expect, test } from '@playwright/test';
 import { seedProfil } from './bantu';
 
-test('mapel tanpa bab menampilkan pesan siap disiapkan dan tombol kembali', async ({ page }) => {
+test('mapel yang tidak ada menampilkan halaman tidak ditemukan', async ({ page }) => {
   await seedProfil(page);
-  await page.goto('/mapel/inggris');
-  await expect(page.getByText('Materi sedang disiapkan.')).toBeVisible();
-
-  await page.getByRole('button', { name: 'Kembali ke Mapel' }).click();
-  await expect(page).toHaveURL(/\/mapel$/);
+  // Semua mapel rilis sudah punya bab, jadi cabang "Materi sedang disiapkan"
+  // tidak terjangkau; yang diuji adalah mapel fiktif → NotFound.
+  await page.goto('/mapel/tidak-ada-mapel');
+  await expect(page.getByText('Halaman tidak ditemukan')).toBeVisible();
 });
 
 test('daftar mapel menampilkan PAI dan Inggris', async ({ page }) => {
