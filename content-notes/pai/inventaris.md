@@ -91,3 +91,18 @@ Soal guru: 0
 **Jumlah soal pai-b01-s01:** 16 soal dinilai (7 pg, 4 bs, 3 isian, 1 jodohkan, 1 urutkan) + 1 uraian.
 **Level:** 6 mudah, 6 sedang, 4 menantang.
 **Teks Arab:** sudah dicocokkan dengan gambar halaman 1 bahan (`_ekstrak/halaman/...-hal001.png`).
+
+## Cakupan materi pai-b02
+
+| Gagasan di kartu materi | Soal yang menguji |
+|---|---|
+| Surah ke-108, tiga ayat, Makkiyah, arti nikmat yang banyak | q001, q002, q003, q004 |
+| Bacaan ayat 1 + artinya | q007, q010 |
+| Bacaan ayat 2 + artinya | q008, q010 |
+| Bacaan ayat 3 + artinya | q009, q010, q013, q015 |
+| Kandungan surah (syukur, salat, ikhlas) | q005, q011, q014, q017 |
+| Cara menghafal (dengar, tiru, ulangi, berurutan, setor) | q006, q012, q016 |
+
+**Jumlah soal pai-b02-s01:** 16 soal dinilai (7 pg, 4 bs, 3 isian, 1 jodohkan, 1 urutkan) + 1 uraian.
+**Level:** 6 mudah, 6 sedang, 4 menantang.
+**Teks Arab:** dicocokkan dengan gambar halaman 2 bahan dan API alquran.cloud (`editions/quran-uthmani`).

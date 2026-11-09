@@ -12,7 +12,7 @@
 ---
 
 ## Status Saat Ini
-- **Tahap Aktif:** S11 — bab 1 PAI selesai. Berikutnya **C-PAI-02** (Surah Al-Kautsar)
+- **Tahap Aktif:** S11 — bab 2 PAI selesai. Berikutnya **C-PAI-03** (Izhar Halqi)
 - **Lokasi Proyek:** `D:\!AGY\siap-kelas3`
 - **URL Produksi:** *(belum di-deploy, diisi pada S12)*
 
@@ -41,7 +41,7 @@
 
 **PAI** (8 bab, semuanya MODUL — tidak ada soal guru di bahan):
 - [x] **C-PAI-01** — Huruf Hijaiyah Bersambung & Mad Tabi'i
-- [ ] **C-PAI-02** — Surah Al-Kautsar
+- [x] **C-PAI-02** — Surah Al-Kautsar
 - [ ] **C-PAI-03** — Huruf Hijaiyah Bersambung & Izhar Halqi
 - [ ] **C-PAI-04** — Hadis tentang Kewajiban Salat
 - [ ] **C-PAI-05** — Sifat-Sifat Allah Swt.
@@ -72,6 +72,12 @@
 ---
 
 ## Log Sesi
+
+### 2026-11-09 — C-PAI-02 Surah Al-Kautsar (Selesai)
+- **Yang dikerjakan:** `src/content/pai/bab-02.ts` (6 kartu materi, 16 soal dinilai + 1 uraian), daftarkan di `src/content/pai/index.ts`.
+- **Teks Arab:** diverifikasi dari gambar halaman 2 bahan dan API alquran.cloud — إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ / فَصَلِّ لِرَبِّكَ وَانْحَرْ / إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ. Latin & arti memakai versi bahan guru.
+- **Verifikasi:** `npm.cmd run test:konten` lulus, `npm.cmd run cek` lulus, e2e `konten.spec.ts` 4 passed (bab 1 + 2).
+- **Sesi berikutnya:** **C-PAI-03** (Huruf Hijaiyah Bersambung & Izhar Halqi).
 
 ### 2026-11-06 — C-PAI-01 Huruf Hijaiyah Bersambung & Mad Tabi'i (Selesai)
 - **Yang dikerjakan:** `src/content/pai/bab-01.ts` (5 kartu materi, 16 soal dinilai + 1 uraian), daftarkan di `src/content/pai/index.ts`, tambah `tests/e2e/konten.spec.ts` (parametris per bab).
