@@ -1,4 +1,5 @@
 import type { Mapel } from '../types';
+import { bab01 } from './bab-01';
 
 export const inggris: Mapel = {
   id: 'inggris',
@@ -6,5 +7,5 @@ export const inggris: Mapel = {
   namaPendek: 'Inggris',
   ikon: 'Languages',
   warna: 'ing',
-  bab: [],
+  bab: [bab01],
 };

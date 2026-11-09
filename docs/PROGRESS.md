@@ -12,7 +12,7 @@
 ---
 
 ## Status Saat Ini
-- **Tahap Aktif:** S11 — bab 2 PAI selesai. Berikutnya **C-PAI-03** (Izhar Halqi)
+- **Tahap Aktif:** S11 — semua 8 bab PAI + bab Inggris selesai. Berikutnya **S12** (QA & rilis)
 - **Lokasi Proyek:** `D:\!AGY\siap-kelas3`
 - **URL Produksi:** *(belum di-deploy, diisi pada S12)*
 
@@ -42,15 +42,15 @@
 **PAI** (8 bab, semuanya MODUL — tidak ada soal guru di bahan):
 - [x] **C-PAI-01** — Huruf Hijaiyah Bersambung & Mad Tabi'i
 - [x] **C-PAI-02** — Surah Al-Kautsar
-- [ ] **C-PAI-03** — Huruf Hijaiyah Bersambung & Izhar Halqi
-- [ ] **C-PAI-04** — Hadis tentang Kewajiban Salat
-- [ ] **C-PAI-05** — Sifat-Sifat Allah Swt.
-- [ ] **C-PAI-06** — Iman kepada Kitab-Kitab Allah Swt.
-- [ ] **C-PAI-07** — Berbaik Sangka kepada Allah Swt.
-- [ ] **C-PAI-08** — Akhlak terhadap Orang Tua
+- [x] **C-PAI-03** — Huruf Hijaiyah Bersambung & Izhar Halqi
+- [x] **C-PAI-04** — Hadis tentang Kewajiban Salat
+- [x] **C-PAI-05** — Sifat-Sifat Allah Swt.
+- [x] **C-PAI-06** — Iman kepada Kitab-Kitab Allah Swt.
+- [x] **C-PAI-07** — Berbaik Sangka kepada Allah Swt.
+- [x] **C-PAI-08** — Akhlak terhadap Orang Tua
 
 **Bahasa Inggris** (1 bab, LATIHAN — 15 soal guru, tanpa soal buatan):
-- [ ] **C-ING-01** — Classroom Commands
+- [x] **C-ING-01** — Classroom Commands
 
 ### Tahap 3: QA Akhir & Rilis (S12)
 - [ ] **S12** — Pemilihan nama final bersama user, QA visual menyeluruh (360px terang/gelap), deploy ke Vercel (`sekawan`), & verifikasi link live
@@ -160,3 +160,9 @@
 - **Status:** Seluruh keputusan produk dikunci melalui wawancara `/grill-me` (16 keputusan).
 - **Dokumen yang dibuat:** `PLAN.md`, `CONTENT_GUIDE.md`, `PROGRESS.md`.
 - **Sesi berikutnya:** **S0** (Persiapan proyek & repo di `D:\!AGY\siap-kelas3`).
+
+### 2026-11-09 — C-PAI-03 s.d. C-PAI-08 + C-ING-01 (Selesai, 7 sesi konten)
+- **Yang dikerjakan:** `bab-03.ts` (Izhar Halqi), `bab-04.ts` (Hadis Salat), `bab-05.ts` (Sifat Allah), `bab-06.ts` (Kitab Allah), `bab-07.ts` (Husnuzan), `bab-08.ts` (Akhlak Ortu) — masing-masing 5-6 kartu materi + 16 soal dinilai + 1 uraian; `inggris/bab-01.ts` (15 soal guru Worksheet Classroom Commands, kunci ditentukan agen); daftarkan semua di `pai/index.ts` + `inggris/index.ts`.
+- **Total konten:** PAI 8 bab / 8 sub-bab / 41 kartu / 128 soal dinilai + 8 uraian; Inggris 1 bab / 1 sub-bab / 15 soal guru. Teks Arab diverifikasi dari gambar halaman bahan (P2: surah; P4: hadis; P8: doa ortu; P9: tabel sifat/kitab/husnuzan disalin per poin).
+- **Verifikasi:** `npm.cmd run test:konten` lulus, `npm.cmd run cek` lulus, e2e `konten.spec.ts` 18 passed (9 bab × hp+desktop).
+- **Sesi berikutnya:** **S12** (QA akhir & rilis).

@@ -106,3 +106,84 @@ Soal guru: 0
 **Jumlah soal pai-b02-s01:** 16 soal dinilai (7 pg, 4 bs, 3 isian, 1 jodohkan, 1 urutkan) + 1 uraian.
 **Level:** 6 mudah, 6 sedang, 4 menantang.
 **Teks Arab:** dicocokkan dengan gambar halaman 2 bahan dan API alquran.cloud (`editions/quran-uthmani`).
+
+## Cakupan materi pai-b03
+
+| Gagasan di kartu materi | Soal yang menguji |
+|---|---|
+| Pengertian Izhar Halqi (dibaca jelas, tidak dilebur) | q001, q002, q006, q016 |
+| Enam huruf halqi | q003, q004, q015 |
+| Contoh مَنْ آمَنَ (nun sukun + hamzah) | q005, q010 |
+| Contoh مِنْ هَادٍ (nun sukun + ha) | q007, q010 |
+| Contoh عَلِيمٌ حَكِيمٌ (tanwin + ha) | q008, q010 |
+| Langkah membaca + latihan dengan guru | q009, q011, q014 |
+| Tartil dan tajwid | q012, q013, q016 |
+
+**Jumlah soal pai-b03-s01:** 16 soal dinilai (6 pg, 5 bs, 3 isian, 1 jodohkan, 1 urutkan) + 1 uraian.
+**Level:** 6 mudah, 6 sedang, 4 menantang.
+
+## Cakupan materi pai-b04
+
+| Gagasan di kartu materi | Soal yang menguji |
+|---|---|
+| Pengertian salat (takbiratul ihram - salam) | q001, q016 |
+| Lima salat fardu | q002, q003, q008, q013 |
+| Hadis lima perkara + perawi | q004, q005, q007 |
+| Salat lima waktu wajib | q007, q014 |
+| Manfaat salat | q009, q011 |
+| Sikap membiasakan salat | q006, q010, q012, q014, q015, q017 |
+
+**Jumlah soal pai-b04-s01:** 16 soal dinilai (6 pg, 4 bs, 3 isian, 1 jodohkan, 1 urutkan) + 1 uraian.
+**Level:** 6 mudah, 6 sedang, 4 menantang.
+
+## Cakupan materi pai-b05
+
+| Gagasan di kartu materi | Soal yang menguji |
+|---|---|
+| Allah Maha Esa, sifat sempurna | q001, q002, q013 |
+| 6 sifat pertama (Wujud-Qudrat) | q003, q004, q006, q007, q010, q014 |
+| 5 sifat lanjutan (Ilmu-Kalam) | q005, q009, q010, q016 |
+| Contoh sehari-hari (jujur, doa, belajar, syukur, esa) | q008, q011, q012 |
+| Cara meyakini + hikmah | q011, q015, q017 |
+
+**Jumlah soal pai-b05-s01:** 16 soal dinilai (6 pg, 4 bs, 3 isian, 1 jodohkan, 1 urutkan) + 1 uraian.
+**Level:** 6 mudah, 6 sedang, 4 menantang.
+
+## Cakupan materi pai-b06
+
+| Gagasan di kartu materi | Soal yang menguji |
+|---|---|
+| Pengertian iman kepada kitab | q001, q008 |
+| 4 kitab + rasul + bahasa | q002, q003, q004, q005, q007, q010, q014 |
+| Al-Qur’an pedoman via Jibril | q005, q006, q009, q016 |
+| Cara beriman (yakini, ketahui, baca, amal, hormat) | q008, q011, q015, q017 |
+| Perilaku + hikmah | q012, q013, q017 |
+
+**Jumlah soal pai-b06-s01:** 16 soal dinilai (6 pg, 4 bs, 3 isian, 1 jodohkan, 1 urutkan) + 1 uraian.
+**Level:** 6 mudah, 6 sedang, 4 menantang.
+
+## Cakupan materi pai-b07
+
+| Gagasan di kartu materi | Soal yang menguji |
+|---|---|
+| Pengertian husnuzan + bukan malas | q001, q002, q005, q014 |
+| Contoh sehari-hari (6 keadaan) | q004, q006, q007, q008, q010, q012 |
+| Cara menerapkan (6 amalan) | q003, q009, q010, q013, q016 |
+| Hikmah (sabar, syukur, optimis, tekun) | q011, q014, q015, q017 |
+
+**Jumlah soal pai-b07-s01:** 16 soal dinilai (6 pg, 4 bs, 3 isian, 1 jodohkan, 1 urutkan) + 1 uraian.
+**Level:** 6 mudah, 6 sedang, 4 menantang.
+
+## Cakupan materi pai-b08
+
+| Gagasan di kartu materi | Soal yang menguji |
+|---|---|
+| Birrul walidain, hormat | q001, q002 |
+| Perintah Al-Isra 23 | q003, q009 |
+| 5 bentuk akhlak | q004, q005, q006, q007, q008, q010 |
+| Doa orang tua | q009, q016 |
+| Contoh 7 keadaan + hikmah | q010, q011, q012, q014, q015, q013, q017 |
+
+**Jumlah soal pai-b08-s01:** 16 soal dinilai (6 pg, 4 bs, 3 isian, 1 jodohkan, 1 urutkan) + 1 uraian.
+**Level:** 6 mudah, 6 sedang, 4 menantang.
+**Teks Arab doa:** diverifikasi dari gambar halaman 9: رَبِّ اغْفِرْ لِي وَلِوَالِدَيَّ وَارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا.

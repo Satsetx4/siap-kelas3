@@ -41,3 +41,7 @@ Soal guru: 15 (10 pilihan ganda + 5 isian dengan kotak kata)
 1. Worksheet tidak menyertakan kunci jawaban, sehingga seluruh kunci ditentukan agen (kolom "Kunci oleh agen = ya").
 2. Tidak ada gambar pada worksheet.
 3. Bahan berupa latihan saja: tidak ada modul, jadi tidak ada soal buatan dan tidak ada soal "Dengarkan lalu pilih".
+
+## Cakupan materi inggris-b01
+*(Sub-bab ini LATIHAN murni — tidak ada kartu materi dan tidak ada soal buatan, sesuai CONTENT_GUIDE.)*
+**Jumlah soal guru:** 15 (10 pg + 5 isian).
