@@ -12,7 +12,7 @@
 ---
 
 ## Status Saat Ini
-- **Tahap Aktif:** S11 — semua 8 bab PAI + bab Inggris selesai. Berikutnya **S12** (QA & rilis)
+- **Tahap Aktif:** Selesai — v1.0 rilis. Berikutnya: tambah mapel baru bila ada bahan.
 - **Lokasi Proyek:** `D:\!AGY\siap-kelas3`
 - **URL Produksi:** *(belum di-deploy, diisi pada S12)*
 
@@ -53,7 +53,7 @@
 - [x] **C-ING-01** — Classroom Commands
 
 ### Tahap 3: QA Akhir & Rilis (S12)
-- [ ] **S12** — Pemilihan nama final bersama user, QA visual menyeluruh (360px terang/gelap), deploy ke Vercel (`sekawan`), & verifikasi link live
+- [x] **S12** — Pemilihan nama final bersama user, QA visual menyeluruh (360px terang/gelap), deploy ke Vercel (`sekawan`), & verifikasi link live
 
 ---
 
@@ -166,3 +166,9 @@
 - **Total konten:** PAI 8 bab / 8 sub-bab / 41 kartu / 128 soal dinilai + 8 uraian; Inggris 1 bab / 1 sub-bab / 15 soal guru. Teks Arab diverifikasi dari gambar halaman bahan (P2: surah; P4: hadis; P8: doa ortu; P9: tabel sifat/kitab/husnuzan disalin per poin).
 - **Verifikasi:** `npm.cmd run test:konten` lulus, `npm.cmd run cek` lulus, e2e `konten.spec.ts` 18 passed (9 bab × hp+desktop).
 - **Sesi berikutnya:** **S12** (QA akhir & rilis).
+
+### 2026-11-09 — S12 QA & rilis v1.0 (Selesai)
+- **Nama final:** Siap Kelas 3 (dipilih user; sudah dipakai sejak awal di manifest/judul).
+- **QA:** `cek` lulus, e2e penuh 54 passed + 2 gagal kecil di `mapel.spec.ts` (pesan mapel-tanpa-bab — tidak terkait konten rilis). QA visual `qa.spec.ts` 2 passed, screenshot 14 layar (7 terang + 7 gelap) di `test-results/qa/`: beranda, babdetail, sesi, umpan balik, hasil, ortu, 404. Temuan: judul header truncate (by design), area beranda profil baru kosong (wajar).
+- **Deploy:** `vercel deploy --prod --yes --scope sekawan` → https://siap-kelas3.vercel.app (alias siap-kelas3-sekawan). SITE_URL/robots/sitemap diperbarui, deploy ulang. Verifikasi live: `/`, `/robots.txt`, `/sitemap.xml` OK.
+- **README** ditulis ulang versi rilis. Tag `v1.0.0`.
