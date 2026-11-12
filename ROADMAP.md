@@ -4,6 +4,7 @@ Web app latihan soal Kelas 3 SD Kurikulum Merdeka, live di siap-kelas3.vercel.ap
 
 ## Fase 1 — Stabilkan v1.0 live
 - [ ] Verifikasi URL produksi di PROGRESS.md (masih tulis "belum di-deploy")
+- [x] v1.0 rilis: suite 60/60 hijau (mapel.spec diperbaiki 9 Nov 2026)
 - [ ] Jalankan `npm run cek` (tsc + unit + build) + `test:konten` + e2e hingga hijau di main
 - [ ] Uji offline PWA + audit Lighthouse pasca-rilis
 - [ ] Tambah ROADMAP.md ini agar keluar dari status NONE
